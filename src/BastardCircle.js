@@ -72,7 +72,7 @@ BastardCircle.prototype.draw = function(ctx) {
   ctx.save();
   ctx.fillStyle = grad;
   ctx.beginPath();
-  ctx.arc(this.x,this.y,this.rad+OUTER_GLOW,0,Math.PI*2);
+  ctx.arc(this.x,this.y,this.rad+OUTER_GLOW,0,Math.PI*2, false);
   ctx.fill();
   ctx.restore();
 
@@ -80,7 +80,7 @@ BastardCircle.prototype.draw = function(ctx) {
   ctx.strokeStyle = "white";
   ctx.lineWidth = 5;
   ctx.beginPath();
-  ctx.arc(this.x,this.y,this.rad,0,Math.PI*2);
+  ctx.arc(this.x,this.y,this.rad,0,Math.PI*2, false);
   ctx.stroke();
   ctx.restore();
 
