@@ -15,8 +15,6 @@ function PlayerShip(game) {
   this.weaponList.push(new TriShooter(this.game,this));
   // the index in weaponList of the active weapon
   this.activeWeapon = 0; 
-  this.halo = new BastardCircle(this.game,this);
-  this.game.addEntity(this.halo);
   this.health = CONST.PLAYER_SHIP_HEALTH;
   this.ammo_imgs = [
     ASSET_MANAGER.getAsset(CONST.PEA_SHOOTER_AMMO_IMAGE),

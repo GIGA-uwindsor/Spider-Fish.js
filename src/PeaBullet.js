@@ -1,7 +1,8 @@
 function PeaBullet(game, x, y, a) {
   var xv = Math.cos(a) * CONST.PEA_BULLET_SPEED;
   var yv = Math.sin(a) * CONST.PEA_BULLET_SPEED;
-  HumanBullet.call(this,game,x,y,xv,yv,CONST.PEA_BULLET_IMAGE);
+  var life = 1;
+  HumanBullet.call(this,game,x,y,xv,yv,life,CONST.PEA_BULLET_IMAGE);
 }
 obj.extend(PeaBullet,HumanBullet);
 
@@ -30,8 +31,9 @@ PeaBullet.prototype.collide = function() {
 }
 
 PeaBullet.prototype.update = function() {
-  this.x += this.xVelo * this.game.clockTick;
-  this.y += this.yVelo * this.game.clockTick;
+  //this.x += this.xVelo * this.game.clockTick;
+  //this.y += this.yVelo * this.game.clockTick;
+  PeaBullet.zuper.update.call(this);
 }
 
 PeaBullet.prototype.draw = function(ctx) {
