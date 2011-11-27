@@ -1,34 +1,44 @@
-function AssetManager() {
+function AssetManager() 
+{
   this.successCount = 0;
   this.errorCount = 0;
   this.cache = {};
   this.downloadQueue = [];
 }
 
-AssetManager.prototype.queueDownload = function(path) {
+AssetManager.prototype.queueDownload = function(path) 
+{
   this.downloadQueue.push(path);
 }
 
-AssetManager.prototype.downloadAll = function(downloadCallback) {
-  if (this.downloadQueue.length === 0) {
+AssetManager.prototype.downloadAll = function(downloadCallback) 
+{
+  if (this.downloadQueue.length === 0) 
+  {
     downloadCallback();
   }
 
-  for (var i = 0; i < this.downloadQueue.length; i++) {
+  var countDownloads = this.downloadQueue.length;
+  for (var i = 0; i < countDownloads; i++) 
+  {
     var path = this.downloadQueue[i];
     var img = new Image();
     var that = this;
-    img.addEventListener("load", function() {
+    img.addEventListener("load", function() 
+    {
       if (DEBUG)
         console.log(this.src + ' is loaded');
       that.successCount += 1;
-      if (that.isDone()) {
+      if (that.isDone()) 
+      {
         downloadCallback();
       }
     }, false);
-    img.addEventListener("error", function() {
+    img.addEventListener("error", function() 
+    {
       that.errorCount += 1;
-      if (that.isDone()) {
+      if (that.isDone()) 
+      {
         downloadCallback();
       }
     }, false);
@@ -37,11 +47,13 @@ AssetManager.prototype.downloadAll = function(downloadCallback) {
   }
 }
 
-AssetManager.prototype.getAsset = function(path) {
+AssetManager.prototype.getAsset = function(path) 
+{
   return this.cache[path];
 }
 
-AssetManager.prototype.isDone = function() {
+AssetManager.prototype.isDone = function() 
+{
   return (this.downloadQueue.length == this.successCount + this.errorCount);
 }
 

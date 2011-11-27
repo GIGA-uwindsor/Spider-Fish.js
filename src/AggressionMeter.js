@@ -27,30 +27,36 @@
 //    p = number of points.
 //
 
-function AggressionMeter() {
+function AggressionMeter() 
+{
   this.points = 0;
   this.min = 0;
   this.max = 100;
 }
 
-AggressionMeter.prototype.recordShot = function() {
+AggressionMeter.prototype.recordShot = function() 
+{
   this.points += 2;
 }
 
-AggressionMeter.prototype.recordHit = function() {
+AggressionMeter.prototype.recordHit = function() 
+{
   this.points += 4;
 }
 
-AggressionMeter.prototype.recordKill = function() {
+AggressionMeter.prototype.recordKill = function() 
+{
   this.points += 8;
 }
 
-AggressionMeter.prototype.recordPacifism = function() {
+AggressionMeter.prototype.recordPacifism = function() 
+{
   this.points -= 4;
 }
 
 // returns the current aggression level. see top of file
 // for an explanation of how this is calculated.
-AggressionMeter.prototype.read = function() {
-  return Math.round(100.0/(1 + Math.pow(4, -0.01*this.points)));
+AggressionMeter.prototype.read = function() 
+{
+  return Math.round(100.0 / (1 + Math.pow(4, -0.01*this.points)));
 }

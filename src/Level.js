@@ -1,32 +1,51 @@
-function Level(game,spawns){
+function Level(game, spawns)
+{
   this.game = game;
-  if (spawns) {
+  if (spawns) 
+  {
     this.spawns = spawns;
-    this.spawns.sort(function(a,b){return a.time<b.time;});
+    this.spawns.sort(
+      function(a, b)
+      {
+        return a.time < b.time;
+      }
+    );
   }
-  else {
+  else 
+  {
     this.spawns = [];
   }
 }
 
-Level.prototype.isDone = function() {
+Level.prototype.isDone = function() 
+{
   return this.spawns.length == 0;
 }
 
-Level.prototype.addSpawn = function(spawn) {
+Level.prototype.addSpawn = function(spawn) 
+{
   this.spawns.push(spawn);
-  this.spawns.sort(function(a,b){return a.time<b.time;});
+  this.spawns.sort(
+    function(a, b)
+    {
+      return a.time < b.time;
+    }
+  );
 }
 
-Level.prototype.update = function() {
+Level.prototype.update = function() 
+{
   var numSpawns = this.spawns.length;
-  for (var i = 0; i < numSpawns; i++) {
+  for (var i = 0; i < numSpawns; i++) 
+  {
     this.spawns[i].update();
   }
-  for (var i = numSpawns - 1; i >= 0; i--)
+
+  for (var i = numSpawns-1; i >= 0; i--)
   {
-    if (this.spawns[i].isDone()) {
-      this.spawns.splice(i,1);
+    if (this.spawns[i].isDone()) 
+    {
+      this.spawns.splice(i, 1);
     }
   }
 }

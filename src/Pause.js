@@ -1,23 +1,29 @@
-function Pause(duration) {
-  Movement.call(this,duration);
+function Pause(duration) 
+{
+  Movement.call(this, duration);
 }
-obj.extend(Pause,Movement);
+obj.extend(Pause, Movement);
 
-Pause.prototype.getX = function(time) {
+Pause.prototype.getX = function(time) 
+{
   return 0;
 }
 
-Pause.prototype.getY = function(time) {
+Pause.prototype.getY = function(time) 
+{
   return 0;
 }
 
-Pause.prototype.update = function(ticks) {
+Pause.prototype.update = function(ticks) 
+{
   this.timeElapsed += ticks;
-  if (this.timeElapsed > this.duration) {
+  if (this.timeElapsed > this.duration) 
+  {
     this.timeElapsed = this.duration;
   }
 }
 
-Pause.prototype.isDone = function() {
+Pause.prototype.isDone = function() 
+{
   return this.timeElapsed >= this.duration;
 }

@@ -1,4 +1,5 @@
-function Animation(spriteSheet, frameWidth, frameHeight, heightOffset, frameDuration, loop) {
+function Animation(spriteSheet, frameWidth, frameHeight, heightOffset, frameDuration, loop) 
+{
   this.spriteSheet = spriteSheet;
   this.frameWidth = frameWidth;
   this.frameDuration = frameDuration;
@@ -9,31 +10,39 @@ function Animation(spriteSheet, frameWidth, frameHeight, heightOffset, frameDura
   this.loop = loop;
 }
 
-Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) {
-    var scaleBy = scaleBy || 1;
+Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) 
+{
+  var scaleBy = scaleBy || 1;
   this.elapsedTime += tick;
-  if (this.loop) {
-    if (this.isDone()) {
+  if (this.loop) 
+  {
+    if (this.isDone()) 
+    {
       this.elapsedTime = 0;
     }
-  } else if (this.isDone()) {
+  }
+  else if (this.isDone()) 
+  {
     return;
   }
+
   var index = this.currentFrame();
   var locX = x - (this.frameWidth/2) * scaleBy;
   var locY = y - (this.frameHeight/2) * scaleBy;
   ctx.drawImage(this.spriteSheet,
-      index*this.frameWidth, this.heightOffset,  // source from sheet
-      this.frameWidth, this.frameHeight,
-      locX, locY,
-      this.frameWidth*scaleBy,
-      this.frameHeight*scaleBy);
+    index * this.frameWidth, this.heightOffset,  // source from sheet
+    this.frameWidth, this.frameHeight,
+    locX, locY,
+    this.frameWidth * scaleBy, this.frameHeight * scaleBy
+  );
 }
 
-Animation.prototype.currentFrame = function() {
+Animation.prototype.currentFrame = function() 
+{
   return Math.floor(this.elapsedTime / this.frameDuration);
 }
 
-Animation.prototype.isDone = function() {
+Animation.prototype.isDone = function() 
+{
   return (this.elapsedTime >= this.totalTime);
 }

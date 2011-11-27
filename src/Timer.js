@@ -1,14 +1,17 @@
-function Timer() {
+function Timer() 
+{
   this.gameTime = 0;
   this.maxStep = 0.05;
   this.wallLastTimestamp = 0;
 }
 
-Timer.prototype.set = function() {
+Timer.prototype.set = function() 
+{
   this.wallLastTimestamp = Date.now();
 }
 
-Timer.prototype.tick = function() {
+Timer.prototype.tick = function() 
+{
   var wallCurrent = Date.now();
   var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
   this.wallLastTimestamp = wallCurrent;
@@ -18,7 +21,9 @@ Timer.prototype.tick = function() {
   return gameDelta;
 }
 
-Timer.prototype.check = function() {
+// Returns the number of seconds the timer has been running for
+Timer.prototype.check = function() 
+{
   var wallCurrent = Date.now();
   var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
   return wallDelta;

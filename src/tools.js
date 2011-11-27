@@ -1,45 +1,59 @@
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame    ||
-  window.oRequestAnimationFrame      ||
-  window.msRequestAnimationFrame     ||
-  function(callback,element){
+window.requestAnimFrame = (function()
+{
+  return  window.requestAnimationFrame  ||
+  window.webkitRequestAnimationFrame    ||
+  window.mozRequestAnimationFrame       ||
+  window.oRequestAnimationFrame         ||
+  window.msRequestAnimationFrame        ||
+  function(callback,element)
+  {
     window.setTimeout(callback, 1000 / 60);
   };
 })();
 
 obj = {};
-obj.extend = function(subClass, baseClass) {
+obj.extend = function(subClass, baseClass) 
+{
   function inheritance() {}
   inheritance.prototype = baseClass.prototype;
   subClass.prototype = new inheritance();
   subClass.prototype.constructor = subClass;
   subClass.zuper = baseClass.prototype;
 }
-obj.copy = function(p,c) {
-  var c = c||{};
-  for (var i in p) {
-    if (typeof p[i] === 'object') {
-      c[i] = (p[i].constructor === Array)?[]:{};
-      obj.copy(p[i],c[i]);
+obj.copy = function(p, c) 
+{
+  var c = c || {};
+  for (var i in p) 
+  {
+    if (typeof p[i] === 'object') 
+    {
+      c[i] = (p[i].constructor === Array) ? [] : {};
+      obj.copy(p[i], c[i]);
     } 
-    else {
+    else 
+    {
       c[i] = p[i];
     }
   }
   return c;
 }
 
-function flatten( oArray ) {
+function flatten( oArray ) 
+{
   var retVal = [];
-  for (var i=0;i<oArray.length;i++) {
-    if (!(oArray[i] instanceof Array)) {
+  var countOArray = oArray.length;
+  for (var i = 0; i < countOArray; i++) 
+  {
+    if ( !(oArray[i] instanceof Array) ) 
+    {
       retVal.push( oArray[i] );
     } 
-    else {
+    else 
+    {
       var tempFlatt = flatten(oArray[i]);
-      for (var j=0;j<tempFlatt.length;j++) {
+      var countTempFlatt = tempFlatt.length; 
+      for (var j = 0 ; j < countTempFlatt; j++) 
+      {
         retVal.push( tempFlatt[j] );
       }
     }
@@ -47,7 +61,7 @@ function flatten( oArray ) {
   return retVal;
 }
 
-Math.distance = function(x1,y1,x2,y2)
+Math.distance = function(x1, y1, x2, y2)
 {
-  return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+  return Math.sqrt( Math.pow(x2-x1, 2) + Math.pow(y2-y1 , 2) );
 }

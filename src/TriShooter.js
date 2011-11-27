@@ -5,36 +5,46 @@
  * its update method is called by the ship when this
  * weapon is active
  */
-function TriShooter(game,body) {
-  HumanWeapon.call(this,game,body,
+function TriShooter(game,body) 
+{
+  HumanWeapon.call(this, game, body,
     CONST.TRI_SHOOTER_FIRING_SPEED,
     CONST.TRI_SHOOTER_NAME,
     CONST.TRI_SHOOTER_ID,
     CONST.TRI_SHOOTER_IMAGE
-    );
+  );
 }
-obj.extend(TriShooter,HumanWeapon);
+obj.extend(TriShooter, HumanWeapon);
 
-TriShooter.prototype.update = function() {
+TriShooter.prototype.update = function() 
+{
   TriShooter.zuper.update.call(this);
 }
 
-TriShooter.prototype.draw = function() {
-  ctx.drawImage(this.sprite,this.body.x-this.sprite.width/2,this.body.y-this.sprite.height);
+TriShooter.prototype.draw = function() 
+{
+  ctx.drawImage(
+    this.sprite,
+    this.body.x - this.sprite.width/2,
+    this.body.y - this.sprite.height
+  );
   DoubleBarrel.zuper.draw.call(this);
 }
 
-TriShooter.prototype.fireBullet = function(angle) {
-  if (this.ammo > 0) {
+TriShooter.prototype.fireBullet = function(angle) 
+{
+  if (this.ammo > 0) 
+  {
     this.ammo -= 1;
-    this.game.addEntity(new PeaBullet(this.game,this.body.x,this.body.y,angle));
+    this.game.addEntity(new PeaBullet(this.game, this.body.x, this.body.y, angle));
   }
 }
 
-TriShooter.prototype.fire = function() {
-  this.fireBullet(Math.PI/2*3); // 90
-  this.fireBullet(Math.PI/3*4); // 120
-  this.fireBullet(Math.PI/3*5); // 60
+TriShooter.prototype.fire = function() 
+{
+  this.fireBullet(3 * Math.PI/2); // 90
+  this.fireBullet(4 * Math.PI/3); // 120
+  this.fireBullet(5 * Math.PI/3); // 60
   TriShooter.zuper.fire.call(this);
 }
 
