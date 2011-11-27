@@ -12,6 +12,9 @@ PeaBullet.prototype.destroy = function() {
   }
 }
 
+//
+// TODO: code in here may be repetitive in other bullet types.
+//
 PeaBullet.prototype.collide = function() {
   var result = this.game.aabb.intersects(
     new AabbTree.AxisAlignedBox(
@@ -25,6 +28,11 @@ PeaBullet.prototype.collide = function() {
         this.removeFromWorld = true;
         this.explode = true;
         entity.health -= CONST.PEA_BULLET_DAMAGE;
+        if (entity.health > 0) {
+          this.game.aggressionMeter.recordHit();
+        } else {
+          this.game.aggressionMeter.recordKill();
+        }
       }
     }
   }
