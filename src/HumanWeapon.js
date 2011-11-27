@@ -40,9 +40,9 @@ HumanWeapon.prototype.update = function()
   // guns have cooled down and no shot is being made
   if (canFire) 
   {
-    // if a half second has passed without shooting,
-    // record this on the aggression meter.
-    if (this.pacifismTimer.check() >= 0.5) 
+    // if the player has not been shooting for long enough,
+    // give them some pacifism points.
+    if (this.pacifismTimer.check() >= STANDARD.PACIFISM_DELAY) 
     {
       this.game.aggressionMeter.recordPacifism();
       this.pacifismTimer.set(); // restart timer.
