@@ -4,6 +4,44 @@
     <meta charset="utf-8">
     <title>Spider-Fish.js</title>
   </head>
+  <style type="text/css">
+    * {
+      padding:0;
+      margin:0;
+      font-size:0;
+    }
+  </style>
+  <script type="text/javascript" src="src/jquery/jquery.js"></script>
+  <script type="text/javascript"> 
+  
+  $(function(){
+    scaleCanvas();
+    $(window).resize(scaleCanvas);
+  });
+  
+  //
+  // scale the game canvas to fit in the viewport dimensions.
+  //
+  function scaleCanvas() {
+    // vp = viewport, t = target
+    var tRatio = 500.0/750.0;
+    var vpWidth = $(window).width();
+    var vpHeight = $(window).height();
+    var vpRatio = vpWidth/vpHeight;
+    var canvas = $("#surface");
+    // height is bounding
+    if (vpRatio > tRatio) {
+      canvas.width(vpHeight * tRatio);
+      canvas.height(vpHeight);
+    }
+    // width is bounding (or neither are bounding)
+    else {
+      canvas.width(vpWidth);
+      canvas.height(vpWidth * (1.0/tRatio));
+    }
+  }
+  
+  </script>
   <body style="background:black;">
     <center>
       <canvas id="surface" width="500" height="750" ></canvas>

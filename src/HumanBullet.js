@@ -19,7 +19,6 @@ HumanBullet.prototype.update = function() {
   this.y += this.yVelo * this.game.clockTick;
   
   // kill the bullet if its time is up
-  console.log(this.lifeTimer.check());
   if (this.lifeTimer.check() > this.lifeTicks) {
     this.removeFromWorld = true;
   }
