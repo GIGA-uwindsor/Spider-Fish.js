@@ -23,7 +23,7 @@ AimlessDonut.prototype.start = function()
   }
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
-  this.meterGraphic = new AggressionMeterGraphic(1, this.surfaceHeight-this.surfaceHeight*0.02, this.surfaceHeight*0.02-1, this.surfaceWidth/3, ctx, this.aggressionMeter);
+  this.meterGraphic = new AggressionMeterGraphic(0, this.surfaceHeight-this.surfaceHeight*0.02, this.surfaceHeight*0.02-1, this.surfaceWidth/3, ctx, this.aggressionMeter);
   AimlessDonut.zuper.start.call(this);
 }
 

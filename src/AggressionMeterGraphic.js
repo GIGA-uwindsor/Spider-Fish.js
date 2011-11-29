@@ -13,7 +13,7 @@ function AggressionMeterGraphic(x, y, height, length, ctx, meter)
 	this.length = length;
 	this.height = height;
 	this.center = length/2;
-	this.increment = length/98;
+	this.increment = (length - 2)/100;
 	this.monitoredObject = meter;
 }
 
