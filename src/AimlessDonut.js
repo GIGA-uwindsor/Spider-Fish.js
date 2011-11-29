@@ -23,6 +23,7 @@ AimlessDonut.prototype.start = function()
   }
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
+  this.meterGraphic = new AggressionMeterGraphic(1, this.surfaceHeight-this.surfaceHeight*0.02, this.surfaceHeight*0.02-1, this.surfaceWidth/3, ctx, this.aggressionMeter);
   AimlessDonut.zuper.start.call(this);
 }
 
@@ -58,9 +59,6 @@ AimlessDonut.prototype.update = function()
   }  
   AimlessDonut.zuper.update.call(this);
   
-  // TODO: we don't have a visual aggression meter,
-  // so the best we can do is write it to the console.
-  console.log(this.aggressionMeter.read());
 }
 
 AimlessDonut.prototype.preDraw = function()
@@ -72,6 +70,7 @@ AimlessDonut.prototype.postDraw = function()
 {
   this.drawScore();
   this.drawLives();
+  this.meterGraphic.draw();
 }
 
 AimlessDonut.prototype.drawBackground = function() 
