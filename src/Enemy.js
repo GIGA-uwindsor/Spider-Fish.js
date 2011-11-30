@@ -28,6 +28,9 @@ Enemy.prototype.draw = function(ctx)
 
 Enemy.prototype.drawHealthBar = function(ctx) 
 {
+  if (this.health >= this.maxHealth || this.health <= 0) {
+    return;
+  }
   var width = this.w * (this.health/this.maxHealth);
   ctx.save();
   ctx.translate(this.x, this.y);
