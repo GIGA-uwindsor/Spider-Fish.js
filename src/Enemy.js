@@ -14,6 +14,7 @@ obj.extend(Enemy, Entity);
 
 Enemy.prototype.collide = function() 
 {
+  Enemy.zuper.collide.call(this);
 }
 
 Enemy.prototype.update = function() 
