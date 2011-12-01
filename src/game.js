@@ -37,7 +37,7 @@ var level = new Level(game,
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
     new Spawn(game, 1, 10, 1, {x:0, y:0}, [ z ], YellowInvader),
     new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
-	  new Spawn(game, 1, 10, 4, {x : 0, y : 0}, [z], X_2Invader),
+	  new Spawn(game, 1, 10, 4, {x:200, y:-10}, [b, delay, a], X_2Invader),
   ]
 );
 

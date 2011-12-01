@@ -10,10 +10,6 @@ function X_2Invader(game, x, y, path)
 
 	  X2Invader
   );
-  this.weapon = new OrbBlaster(this.game, this);
-  this.path = path;
-  this.sx = x;
-  this.sy = y;
 }
 obj.extend(X_2Invader, EnemyChange);
 

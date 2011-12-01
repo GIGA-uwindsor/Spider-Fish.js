@@ -46,6 +46,8 @@ PeaBullet.prototype.collide = function()
         {
           this.game.aggressionMeter.recordKill();
         }
+
+        break;
       }
     }
   }

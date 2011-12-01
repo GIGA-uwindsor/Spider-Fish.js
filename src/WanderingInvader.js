@@ -9,6 +9,9 @@ function WanderingInvader(game, x, y, path, image, health, damage, points)
   
   this.damage = damage;
   this.points = points;
+
+  this.explode = false;
+  this.drop = false;
 }
 obj.extend(WanderingInvader, Enemy);
 
@@ -17,6 +20,9 @@ WanderingInvader.prototype.destroy = function()
   if (this.explode) 
   {
     this.game.addEntity(new Explosion(this.game, this.x, this.y));
+
+    if (this.drop)
+      this.game.dropCollectable(this.x, this.y);
   }
 }
 
@@ -71,7 +77,7 @@ WanderingInvader.prototype.update = function()
   {
     this.explode = true;
     this.removeFromWorld = true;
-    this.game.dropCollectable(this.x, this.y);
+    this.drop = true;
   }
 
   //check to see if its off the bottom of the screen
