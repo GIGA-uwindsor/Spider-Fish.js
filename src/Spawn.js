@@ -23,8 +23,8 @@ Spawn.prototype.update = function()
   if (this.elapsedTime > this.time + this.interval*this.numSpawned) 
   {
     this.numSpawned++;
-    this.game.addEntity(
-      new this.type(
+    this.game.addEntity(new this.type
+	  (
         this.game,
         this.point.x,
         this.point.y,

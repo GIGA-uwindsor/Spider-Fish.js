@@ -37,6 +37,7 @@ var level = new Level(game,
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
     new Spawn(game, 1, 10, 1, {x:0, y:0}, [ z ], WanderingInvader),
     new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], WanderingInvader),
+	//new Spawn(game, 1, 10, 4, {x : 0, y : 0}, [z], X_2Invader),
   ]
 );
 
@@ -48,6 +49,9 @@ ASSET_MANAGER.queueDownload('img/redBullet.png');
 ASSET_MANAGER.queueDownload('img/ship.png');
 ASSET_MANAGER.queueDownload('img/wanderingInvader.png');
 ASSET_MANAGER.queueDownload('img/angryInvader.png');
+ASSET_MANAGER.queueDownload('img/L2Enemy.png');
+ASSET_MANAGER.queueDownload('img/X2Enemy.png');
+ASSET_MANAGER.queueDownload('img/X_2Enemy.png');
 ASSET_MANAGER.queueDownload('img/triShooter.png');
 ASSET_MANAGER.queueDownload('img/doubleBarrel.png');
 ASSET_MANAGER.queueDownload('img/peaShooter.png');
