@@ -2,17 +2,14 @@ function L2Invader(game, x, y, path)
 {
   //enemy that looks like 2
   //call EnemyChange, pass important parameters (needed for Enemy.call) and 'next enemy' that appears after death
-  EnemyChange.call(this, game, x, y,
+  WanderingInvader.call(this, game, x, y, path,
     CONST.L2INVADER_IMAGE,
     CONST.L2INVADER_HEALTH,
-	null
+    CONST.L2INVADER_DAMAGE,
+    CONST.L2INVADER_POINTS
   );
-  this.weapon = new OrbBlaster(this.game, this);
-  this.path = path;
-  this.sx = x;
-  this.sy = y;
 }
-obj.extend(L2Invader,EnemyChange);
+obj.extend(L2Invader, WanderingInvader);
 
 //(collide funtion similar to function in WanderingInvader)
 L2Invader.prototype.collide = function() 

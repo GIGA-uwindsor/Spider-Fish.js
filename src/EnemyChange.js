@@ -1,12 +1,14 @@
-function EnemyChange(game, x, y, image, health, nextType) 
+function EnemyChange(game, x, y, path, image, health, damage, points, nextType) 
 {
-  Enemy.call(this, game, x, y,
+  WanderingInvader.call(this, game, x, y, path,
     image,
-    health
+    health,
+    damage,
+    points
   );
   this.nextType = nextType;
 }
-obj.extend(EnemyChange,Enemy);
+obj.extend(EnemyChange, WanderingInvader);
 
 EnemyChange.prototype.destroy = function() 
 {
@@ -14,18 +16,18 @@ EnemyChange.prototype.destroy = function()
   {
     this.game.addEntity(new Explosion(this.game, this.x, this.y));
     if (this.nextType != null)
-	{
-	  //used to create next enemy, if next enemy != null
-	  var newEnt = new this.nextType(this.game, this.sx, this.sy,  this.path);
-	  newEnt.x = this.x;
+    {
+      //used to create next enemy, if next enemy != null
+      var newEnt = new this.nextType(this.game, this.sx, this.sy,  this.path);
+      newEnt.x = this.x;
       newEnt.y = this.y;
       this.game.addEntity(newEnt);
-	}
-	else
-	{
-	  //drop collectable if no more enemies
-	  this.game.dropCollectable(this.x, this.y);
-	}
+    }
+    else
+    {
+      //drop collectable if no more enemies
+      this.game.dropCollectable(this.x, this.y);
+    }
   }
 }
 
@@ -75,5 +77,4 @@ EnemyChange.prototype.draw = function(ctx)
   this.drawHealthBar(ctx);
   this.drawSpriteCentered(ctx);
 }
-
 

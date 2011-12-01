@@ -1,15 +1,16 @@
-function WanderingInvader(game, x, y, path) 
+// An abstract class for types of enemies that will wander and shoot down
+function WanderingInvader(game, x, y, path, image, health, damage, points) 
 {
-  Enemy.call(this, game, x, y,
-    CONST.WANDERING_INVADER_IMAGE,
-    CONST.WANDERING_INVADER_HEALTH
-  );
+  Enemy.call(this, game, x, y, image, health);
   this.weapon = new OrbBlaster(this.game, this);
   this.path = path;
   this.sx = x;
   this.sy = y;
+  
+  this.damage = damage;
+  this.points = points;
 }
-obj.extend(WanderingInvader,Enemy);
+obj.extend(WanderingInvader, Enemy);
 
 WanderingInvader.prototype.destroy = function() 
 {
@@ -36,8 +37,8 @@ WanderingInvader.prototype.collide = function()
       if (entity instanceof PlayerShip) 
       {
         this.removeFromWorld = true;
-        entity.health -= CONST.WANDERING_INVADER_DAMAGE;
-        this.game.score += CONST.WANDERING_INVADER_POINTS;
+        entity.health -= this.damage;
+        this.game.score += this.points;
       }
     }
   }

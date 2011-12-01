@@ -35,34 +35,33 @@ var delay = new Pause(1.5, {x:0, y:0});
 var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-    new Spawn(game, 1, 10, 1, {x:0, y:0}, [ z ], WanderingInvader),
-    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], WanderingInvader),
-	//new Spawn(game, 1, 10, 4, {x : 0, y : 0}, [z], X_2Invader),
+    new Spawn(game, 1, 10, 1, {x:0, y:0}, [ z ], YellowInvader),
+    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
+	  new Spawn(game, 1, 10, 4, {x : 0, y : 0}, [z], X_2Invader),
   ]
 );
 
 game.setLevel(level);
 
-ASSET_MANAGER.queueDownload('img/blueBullet.png');
-ASSET_MANAGER.queueDownload('img/background.jpg');
-ASSET_MANAGER.queueDownload('img/redBullet.png');
-ASSET_MANAGER.queueDownload('img/ship.png');
-ASSET_MANAGER.queueDownload('img/wanderingInvader.png');
-ASSET_MANAGER.queueDownload('img/angryInvader.png');
-ASSET_MANAGER.queueDownload('img/L2Enemy.png');
-ASSET_MANAGER.queueDownload('img/X2Enemy.png');
-ASSET_MANAGER.queueDownload('img/X_2Enemy.png');
-ASSET_MANAGER.queueDownload('img/triShooter.png');
-ASSET_MANAGER.queueDownload('img/doubleBarrel.png');
-ASSET_MANAGER.queueDownload('img/peaShooter.png');
+ASSET_MANAGER.queueDownload(CONST.PEA_BULLET_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.BACKGROUND);
+ASSET_MANAGER.queueDownload(CONST.ORB_BULLET_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.PLAYER_SHIP_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.YELLOW_INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.ANGRY_INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.L2INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.X2INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.X_2INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.TRI_SHOOTER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.DOUBLE_BARREL_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.PEA_SHOOTER_IMAGE);
 
-ASSET_MANAGER.queueDownload('img/doubleBarrelAmmo.png');
-ASSET_MANAGER.queueDownload('img/health.png');
-ASSET_MANAGER.queueDownload('img/triShooterAmmo.png');
-ASSET_MANAGER.queueDownload('img/peaShooterAmmo.png');
+ASSET_MANAGER.queueDownload(CONST.DOUBLE_BARREL_AMMO_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.HEALTH_ITEM_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.TRI_SHOOTER_AMMO_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.PEA_SHOOTER_AMMO_IMAGE);
 
-ASSET_MANAGER.queueDownload('img/angryMorph.png');
-ASSET_MANAGER.queueDownload('img/explosions.png');
+ASSET_MANAGER.queueDownload(CONST.EXPLOSION);
 
 ASSET_MANAGER.downloadAll(function() 
 {
