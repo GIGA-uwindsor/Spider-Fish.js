@@ -4,7 +4,8 @@ function Exploder(game, x, y, path)
 		CONST.EXPLODER_IMAGE,
 		CONST.EXPLODER_HEALTH,
 		CONST.EXPLODER_DAMAGE,
-		CONST.EXPLODER_POINTS);
+		CONST.EXPLODER_POINTS
+  );
 }
 obj.extend(Exploder, WanderingInvader);
 
@@ -18,7 +19,7 @@ Exploder.prototype.destroy = function()
 		for (i = 1; i <= n; i++)
 		{
 			this.game.addEntity(
-				new OrbBullet(this.game, this.x, this.y, (i/n)*range)
+				new OrbBullet(this.game, this.x, this.y, (i/n) * range)
 			);
 		}
 	}
