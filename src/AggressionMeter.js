@@ -1,22 +1,16 @@
 //
 // Aggression meter.
 //
-// STANDARD.AGGRO_METER_INIT     meter starts with this many points.
-// STANDARD.AGGRO_METER_MIN      minimum value from read()
-// STANDARD.AGGRO_METER_MAX      maximum value from read()
-// STANDARD.AGGRESSION_SHOT_GAIN points gained per weapon fire.
-// STANDARD.AGGRESSION_HIT_GAIN  points gained per hit on enemy.
-// STANDARD.AGGRESSION_KILL_GAIN points gained per enemy kill.
-// STANDARD.PACIFISM_DELAY       how long the player has to wait between
-//                               each time they are rewarded for pacifism.  
-// STANDARD.PACIFISM_GAIN        points lost per pacifism period.
-//
-// * The last shot to hit and kill an enemy adds 8 points,
-//   not both 4 points for the hit and 8 points for the kill.
-//
-// * Points are used to calculate the aggression level, which
-//   is what the meter is measuring. The range of the aggression
-//   level is from 0 to 100 (both inclusive).
+// 1) The meter starts with 0 points.
+// 2) Every shot fired adds 2 points.
+// 3) Every hit on an enemy adds 4 points.
+// 4) Every kill on an enemy adds 8 points.
+// 5) Every half second not firing removes 4 points.
+// 6) The last shot to hit and kill an enemy adds 8 points,
+//    not both 4 points for the hit and 8 points for the kill.
+// 7) Points are used to calculate the aggression level, which
+//    is what the meter is measuring. The range of the aggression
+//    level is from 0 to 100 (both inclusive).
 //
 // The following equation is used to calculate aggression level.
 //
@@ -35,39 +29,34 @@
 
 function AggressionMeter() 
 {
-  this.points = STANDARD.AGGRO_METER_INIT;
+  this.points = 0;
+  this.min = 0;
+  this.max = 100;
 }
 
 AggressionMeter.prototype.recordShot = function() 
 {
-  this.points += STANDARD.AGGRESSION_SHOT_GAIN;
+  this.points += CONST.AGGRESSION_SHOT_GAIN;
 }
 
 AggressionMeter.prototype.recordHit = function() 
 {
-  this.points += STANDARD.AGGRESSION_HIT_GAIN;
+  this.points += CONST.AGGRESSION_HIT_GAIN;
 }
 
 AggressionMeter.prototype.recordKill = function() 
 {
-  this.points += STANDARD.AGGRESSION_KILL_GAIN;
+  this.points += CONST.AGGRESSION_KILL_GAIN;
 }
 
 AggressionMeter.prototype.recordPacifism = function() 
 {
-  this.points -= STANDARD.PACIFISM_GAIN;
+  this.points -= CONST.PACIFISM_TICK_GAIN;
 }
 
 // returns the current aggression level. see top of file
 // for an explanation of how this is calculated.
 AggressionMeter.prototype.read = function() 
 {
-  var min = STANDARD.AGGRO_METER_MIN;
-  var max = STANDARD.AGGRO_METER_MAX;
-  var reading = Math.round(
-    max / (1 + Math.pow(4, -0.01*this.points))
-  );
-  // scale the reading, which is 0 to 100, to the desired range
-  var scalingFactor = max / (max - min);
-  return reading * scalingFactor + min;
+  return Math.round(100.0 / (1 + Math.pow(4, -0.01*this.points)));
 }
