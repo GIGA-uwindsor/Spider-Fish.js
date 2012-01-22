@@ -110,7 +110,7 @@ AimlessDonut.prototype.drawScore = function()
 
 AimlessDonut.prototype.dropCollectable = function(x, y) 
 {
-  var n = Math.floor(Math.random() * 3);
+  var n = Math.floor(Math.random() * 4);
   switch(n) 
   {
     case 0:
@@ -124,7 +124,9 @@ AimlessDonut.prototype.dropCollectable = function(x, y)
     case 2:
       this.addEntity(new DoubleBarrelAmmo(this, x, y));
       break;
-
+    case 3:
+      this.addEntity(new HaloBonus(this,x,y));
+      break;
     default:
       console.log("RNG produced unexpected value " + n + " in powerup \ generator");
       break;

@@ -53,6 +53,7 @@ ASSET_MANAGER.queueDownload('img/doubleBarrel.png');
 ASSET_MANAGER.queueDownload('img/peaShooter.png');
 
 ASSET_MANAGER.queueDownload('img/doubleBarrelAmmo.png');
+ASSET_MANAGER.queueDownload('img/haloBonus.png');
 ASSET_MANAGER.queueDownload('img/health.png');
 ASSET_MANAGER.queueDownload('img/triShooterAmmo.png');
 ASSET_MANAGER.queueDownload('img/peaShooterAmmo.png');
