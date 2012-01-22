@@ -5,7 +5,6 @@ function AimlessDonut()
   this.score = 0;
   this.backPos = 0;
   this.level = null;
-  this.aggressionMeter = new AggressionMeter();
 }
 obj.extend(AimlessDonut, GameEngine);
 
@@ -23,7 +22,6 @@ AimlessDonut.prototype.start = function()
   }
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
-  this.meterGraphic = new AggressionMeterGraphic(0, this.surfaceHeight-this.surfaceHeight*0.02, this.surfaceHeight*0.02-1, this.surfaceWidth/3, ctx, this.aggressionMeter);
   AimlessDonut.zuper.start.call(this);
 }
 
@@ -58,7 +56,6 @@ AimlessDonut.prototype.update = function()
     this.running = false;
   }  
   AimlessDonut.zuper.update.call(this);
-  
 }
 
 AimlessDonut.prototype.preDraw = function()
@@ -70,7 +67,6 @@ AimlessDonut.prototype.postDraw = function()
 {
   this.drawScore();
   this.drawLives();
-  this.meterGraphic.draw();
 }
 
 AimlessDonut.prototype.drawBackground = function() 
@@ -110,7 +106,7 @@ AimlessDonut.prototype.drawScore = function()
 
 AimlessDonut.prototype.dropCollectable = function(x, y) 
 {
-  var n = Math.floor(Math.random() * 3);
+  var n = Math.floor(Math.random() * 4);
   switch(n) 
   {
     case 0:
@@ -124,7 +120,9 @@ AimlessDonut.prototype.dropCollectable = function(x, y)
     case 2:
       this.addEntity(new DoubleBarrelAmmo(this, x, y));
       break;
-
+    case 3:
+      this.addEntity(new HaloBonus(this,x,y));
+      break;
     default:
       console.log("RNG produced unexpected value " + n + " in powerup \ generator");
       break;

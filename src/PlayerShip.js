@@ -18,6 +18,8 @@ function PlayerShip(game)
 
   // the index in weaponList of the active weapon
   this.activeWeapon = 0; 
+  this.halo = new BastardCircle(this.game,this);
+  this.game.addEntity(this.halo);
   this.health = CONST.PLAYER_SHIP_HEALTH;
 
   this.ammo_imgs = [

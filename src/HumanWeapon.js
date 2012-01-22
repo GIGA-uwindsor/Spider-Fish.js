@@ -10,9 +10,6 @@ function HumanWeapon(game, body, firingSpeed, name, id, imgStr)
   this.name = name;
   this.id = id;
   this.ammo = 0;
-  // keeps track of how long the player has not been firing.
-  this.pacifismTimer = new Timer();
-  this.pacifismTimer.set();
   if (imgStr) 
   {
     this.sprite = ASSET_MANAGER.getAsset(imgStr);
@@ -31,22 +28,6 @@ HumanWeapon.prototype.update = function()
   {
     this.fire();
     this.timeSinceLastShot = 0;
-    this.game.aggressionMeter.recordShot();
-    // restart the pacifism timer, since the player
-    // made a shot.
-    this.pacifismTimer.set();
-  }
-  
-  // guns have cooled down and no shot is being made
-  if (canFire) 
-  {
-    // if the player has not been shooting for long enough,
-    // give them some pacifism points.
-    if (this.pacifismTimer.check() >= STANDARD.PACIFISM_DELAY) 
-    {
-      this.game.aggressionMeter.recordPacifism();
-      this.pacifismTimer.set(); // restart timer.
-    }
   }
 }
 

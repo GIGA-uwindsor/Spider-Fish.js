@@ -38,15 +38,6 @@ PeaBullet.prototype.collide = function()
         this.explode = true;
         entity.health -= CONST.PEA_BULLET_DAMAGE;
 
-        if (entity.health > 0) 
-        {
-          this.game.aggressionMeter.recordHit();
-        }
-        else 
-        {
-          this.game.aggressionMeter.recordKill();
-        }
-
         break;
       }
     }
