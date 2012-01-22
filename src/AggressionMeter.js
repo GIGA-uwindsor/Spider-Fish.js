@@ -36,22 +36,22 @@ function AggressionMeter()
 
 AggressionMeter.prototype.recordShot = function() 
 {
-  this.points += CONST.AGGRESSION_SHOT_GAIN;
+  this.points += 2;
 }
 
 AggressionMeter.prototype.recordHit = function() 
 {
-  this.points += CONST.AGGRESSION_HIT_GAIN;
+  this.points += 4;
 }
 
 AggressionMeter.prototype.recordKill = function() 
 {
-  this.points += CONST.AGGRESSION_KILL_GAIN;
+  this.points += 8;
 }
 
 AggressionMeter.prototype.recordPacifism = function() 
 {
-  this.points -= CONST.PACIFISM_TICK_GAIN;
+  this.points -= 4;
 }
 
 // returns the current aggression level. see top of file
