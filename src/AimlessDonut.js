@@ -5,7 +5,6 @@ function AimlessDonut()
   this.score = 0;
   this.backPos = 0;
   this.level = null;
-  this.aggressionMeter = new AggressionMeter();
 }
 obj.extend(AimlessDonut, GameEngine);
 
@@ -57,10 +56,6 @@ AimlessDonut.prototype.update = function()
     this.running = false;
   }  
   AimlessDonut.zuper.update.call(this);
-  
-  // TODO: we don't have a visual aggression meter,
-  // so the best we can do is write it to the console.
-  console.log(this.aggressionMeter.read());
 }
 
 AimlessDonut.prototype.preDraw = function()
