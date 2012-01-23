@@ -23,8 +23,8 @@ HumanWeapon.prototype.draw = function()
 HumanWeapon.prototype.update = function() 
 {
   this.timeSinceLastShot += this.game.clockTick;
-  var canFire = this.timeSinceLastShot > 1.0/this.firingSpeed;
-  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER] && canFire) 
+
+  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER] && this.timeSinceLastShot > 1.0/this.firingSpeed)
   {
     this.fire();
     this.timeSinceLastShot = 0;
@@ -33,5 +33,4 @@ HumanWeapon.prototype.update = function()
 
 HumanWeapon.prototype.fire = function() 
 {
-  //no base implementation
 }

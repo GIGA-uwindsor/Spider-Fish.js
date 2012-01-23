@@ -1,7 +1,7 @@
 function AngryMorph(game, x, y) 
 {
   Entity.call(this, game, x, y);
-  var sheet = ASSET_MANAGER.getAsset('img/angryMorph.png');
+  var sheet = ASSET_MANAGER.getAsset(CONST.ANGRY_MORPH_SHEET);
   //sprite-sheet, width,height,heightoffset,duration,?loop
   this.animation = new Animation(sheet, 40, 36, 0, 0.05);
 }

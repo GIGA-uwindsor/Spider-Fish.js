@@ -6,12 +6,15 @@
 function BastardCircle(game, body)
 {
   Entity.call(this, game, 0, 0);
+
   this.body = body;
   this.rad = CONST.BASTERED_CIRCLE_START_RAD;
   this.radMax = CONST.BASTERED_CIRCLE_MAX_RAD;
   this.growthRate = CONST.BASTERED_CIRCLE_GROWTH_RATE; //pixels per second
   this.w = this.rad*2;
   this.h = this.rad*2;
+
+  this.shootingShrinkTrackerTicks = 0;
 }
 obj.extend(BastardCircle, Entity);
 
@@ -19,12 +22,28 @@ BastardCircle.prototype.update = function()
 {
   this.x = this.body.x;
   this.y = this.body.y;
-  this.rad += this.growthRate * this.game.clockTick;
-  if (this.rad > this.radMax) {
-    this.rad = this.radMax;
+
+  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER])
+    this.shootingShrinkTrackerTicks += this.game.clockTick;
+  else if (this.shootingShrinkTrackerTicks <= CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING)
+    this.shootingShrinkTrackerTicks -= this.game.clockTick;
+  else
+    this.shootingShrinkTrackerTicks = CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING;
+
+  // Either shrink from the player shooting, or grow a bit
+  if (this.shootingShrinkTrackerTicks > CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING)
+    this.rad -= CONST.BASTERED_CIRCLE_SHRINK_RATE * this.game.clockTick; 
+  else
+  {
+    this.rad += this.growthRate * this.game.clockTick;
+
+    if (this.rad > this.radMax)
+      this.rad = this.radMax;
   }
+
   this.w = this.rad*2;
   this.h = this.rad*2;
+
   BastardCircle.zuper.update.call(this);
 }
 
@@ -39,17 +58,18 @@ BastardCircle.prototype.collide = function()
     {
       if (entity instanceof HumanBullet)
       {
-        if ( Math.distance(this.x, this.y, entity.x, entity.y) > this.rad+entity.w )
+        if ( Math.distance(this.x, this.y, entity.x, entity.y) > this.rad + entity.w )
         {
           entity.removeFromWorld = true;
-          this.rad -= CONST.BASTERED_CIRCLE_SHRINK_RATE;
           this.game.addEntity( new AngryMorph(this.game, entity.x, entity.y) );
         }
       }
     }
   }
+
   if (this.rad < 0)
     this.rad = 0;
+
   BastardCircle.zuper.collide.call(this);
 }
 
@@ -60,11 +80,17 @@ BastardCircle.prototype.draw = function(ctx)
   var grad;
   if (this.rad - INNER_GLOW > 0)
   {
-    grad = ctx.createRadialGradient(this.x, this.y, this.rad-INNER_GLOW, this.x, this.y, this.rad+OUTER_GLOW);
+    grad = ctx.createRadialGradient(
+      this.x, this.y, this.rad-INNER_GLOW,
+      this.x, this.y, this.rad+OUTER_GLOW
+    );
   }
   else
   {
-    grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.rad+OUTER_GLOW);
+    grad = ctx.createRadialGradient(
+      this.x, this.y, 0,
+      this.x, this.y, this.rad+OUTER_GLOW
+    );
   }
       
   var blue = Math.round(this.rad / this.radMax*255);
