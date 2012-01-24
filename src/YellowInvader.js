@@ -6,5 +6,6 @@ function YellowInvader(game, x, y, path)
     CONST.YELLOW_INVADER_DAMAGE,
     CONST.YELLOW_INVADER_POINTS
   );
+  this.radius = 4;           //sets explosion to affect larger radius
 }
 obj.extend(YellowInvader, WanderingInvader);

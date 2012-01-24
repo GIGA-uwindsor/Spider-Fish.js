@@ -1,4 +1,4 @@
-function Explosion(game, x, y, which) 
+function Explosion(game, x, y, which, size) 
 {
   Entity.call(this, game, x, y);
   var sheet = ASSET_MANAGER.getAsset('img/explosions.png');
@@ -10,7 +10,7 @@ function Explosion(game, x, y, which)
   {
     var exp = Math.floor(Math.random() * 8);
   }
-
+  this.size = size;
   //sprite-sheet, width, height, heightoffset, duration, ?loop
   this.animation = new Animation(sheet, 64, 64, 64*exp, 0.04);
 }
@@ -27,7 +27,7 @@ Explosion.prototype.update = function()
 
 Explosion.prototype.draw = function(ctx) 
 {
-  this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+  this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.size);
   Entity.prototype.draw.call(this, ctx);
 }
 
