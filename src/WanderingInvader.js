@@ -13,7 +13,7 @@ function WanderingInvader(game, x, y, path, image, health, damage, points)
   this.explode = false;
   this.drop = false;
 
-  this.radius = 0;
+  this.explosionRadius = 0;
 }
 obj.extend(WanderingInvader, Enemy);
 
@@ -21,12 +21,12 @@ WanderingInvader.prototype.destroy = function()
 {
   if (this.explode) 
   {
-    if (this.radius != 0)                           
-      this.game.addEntity(new Explosion(this.game, this.x, this.y, 0, this.radius));
+    if (this.explosionRadius != 0)                           
+      this.game.addEntity(new Explosion(this.game, this.x, this.y, 0, this.explosionRadius));
     else
       this.game.addEntity(new Explosion(this.game, this.x, this.y));
 
-    if (this.radius != 0)
+    if (this.explosionRadius != 0)
       this.destroyOthers(); 
 
     if (this.drop)
@@ -37,10 +37,10 @@ WanderingInvader.prototype.destroy = function()
 WanderingInvader.prototype.destroyOthers = function()
 {
   //destroy others 
-  var aCounter = this.radius;
+  var aCounter = this.explosionRadius;
   var bCounter = 1;
 
-  while (bCounter < this.radius)
+  while (bCounter < this.explosionRadius)
   {
     var result = this.game.aabb.intersects(
       new AabbTree.AxisAlignedBox(
@@ -59,14 +59,14 @@ WanderingInvader.prototype.destroyOthers = function()
           this.removeFromWorld = true;
           entity.health -= this.damage;
           this.game.score += this.points;
-          bCounter = this.radius;
+          bCounter = this.explosionRadius;
         }
       }
     }
     WanderingInvader.zuper.collide.call(this);
     aCounter--;
-    if (bCounter < this.radius)
-      bCounter = Math.sqrt(this.radius*this.radius - aCounter*aCounter);
+    if (bCounter < this.explosionRadius)
+      bCounter = Math.sqrt(this.explosionRadius*this.explosionRadius - aCounter*aCounter);
   }
 }
 
