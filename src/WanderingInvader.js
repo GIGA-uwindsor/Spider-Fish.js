@@ -97,25 +97,6 @@ WanderingInvader.prototype.collide = function()
 
 WanderingInvader.prototype.update = function() 
 {
-  //traverse pathway
-  if (this.path.length == 0) 
-  {
-    console.log("ran out of path");
-    this.removeFromWorld = true;
-  }
-  else 
-  {
-    this.path[0].update(this.game.clockTick);
-    this.x = this.sx + this.path[0].getX();
-    this.y = this.sy + this.path[0].getY();
-    if (this.path[0].isDone()) 
-    {
-      this.sx = this.x;
-      this.sy = this.y;
-      this.path.splice(0, 1);
-    }
-  }
-
   //make sure it still has health
   if (this.health <= 0) 
   {

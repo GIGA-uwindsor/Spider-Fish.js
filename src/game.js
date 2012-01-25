@@ -14,28 +14,10 @@ var z = new Bezier(4,
   ]
 );
 
-var a = new Bezier(4,
-  [
-    {x:0, y:0},
-    {x:250, y:0},
-    {x:0, y:400},
-    {x:250, y:400}
-  ]
-);
-var b = new Bezier(6,
-  [
-    {x:0, y:0},
-    {x:500, y:100},
-    {x:-500, y:300},
-    {x:0, y:400}
-  ]
-);
-var delay = new Pause(1.5, {x:0, y:0});
-
 var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
+    new Spawn(game, 0, 20, 2, {x:0, y:0}, YellowInvader),
 	  
   ]
 );

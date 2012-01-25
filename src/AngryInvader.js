@@ -1,6 +1,5 @@
 function AngryInvader(game, x, y) {
   Enemy.call(this, game, x, y, CONST.ANGRY_INVADER_IMAGE, CONST.ANGRY_INVADER_HEALTH);
-  this.weapon = new OrbBlaster(this.game, this);
   
   this.xVelo = 0;
   this.yVelo = CONST.ANGRY_INVADER_SPEED;
