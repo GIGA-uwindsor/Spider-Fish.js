@@ -58,8 +58,7 @@ AngryInvader.prototype.update = function()
   {
     this.removeFromWorld = true;
   }
-  //update weapon
-  this.weapon.update();
+
   AngryInvader.zuper.update.call(this);
 }
 

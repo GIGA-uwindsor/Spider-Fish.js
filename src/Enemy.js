@@ -39,7 +39,7 @@ Enemy.prototype.collide = function()
       if (entity instanceof PlayerShip) 
       {
         this.removeFromWorld = true;
-        entity.health -= this.damage;
+        entity.health -= this.collisionDamage;
         this.game.score += this.points;
       }
     }
@@ -125,7 +125,7 @@ Enemy.prototype.destroyOthers = function()
         if (entity instanceof PlayerShip) 
         {
           this.removeFromWorld = true;
-          entity.health -= this.damage;
+          entity.health -= this.collisionDamage;
           this.game.score += this.points;
           bCounter = this.explosionRadius;
         }
