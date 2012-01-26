@@ -22,15 +22,27 @@ HumanWeapon.prototype.draw = function()
 
 HumanWeapon.prototype.update = function() 
 {
+  var bulletShoot = false;
   this.timeSinceLastShot += this.game.clockTick;
 
-  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER] && this.timeSinceLastShot > 1.0/this.firingSpeed)
+  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER])
   {
-    this.fire();
-    this.timeSinceLastShot = 0;
+  
+		bulletShoot = true; 
+	if (this.timeSinceLastShot > 1.0/this.firingSpeed)
+	{
+		this.fire();
+		this.timeSinceLastShot = 0;
+	}
   }
+  return bulletShoot;
 }
 
 HumanWeapon.prototype.fire = function() 
+{
+	// Should return the amount of bullets fired.
+}
+
+HumanWeapon.prototype.bulletsPerShot = function()
 {
 }

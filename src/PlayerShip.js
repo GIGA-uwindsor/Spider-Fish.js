@@ -22,6 +22,8 @@ function PlayerShip(game)
   this.game.addEntity(this.halo);
   this.health = CONST.PLAYER_SHIP_HEALTH;
 
+  this.shooting = false;
+  
   this.ammo_imgs = [
     ASSET_MANAGER.getAsset(CONST.PEA_SHOOTER_AMMO_IMAGE),
     ASSET_MANAGER.getAsset(CONST.DOUBLE_BARREL_AMMO_IMAGE),
@@ -65,8 +67,10 @@ PlayerShip.prototype.update = function()
   }
 
   this.checkWeapons();
-  //update the current activeWeapon
-  this.weaponList[this.activeWeapon].update();
+  //update the current activeWeapons
+  this.shooting = this.weaponList[this.activeWeapon].update();
+  this.halo.ShootingState(this.shooting, this.weaponList[this.activeWeapon].bulletsPerShot());
+
   PlayerShip.zuper.update.call(this);
 }
 

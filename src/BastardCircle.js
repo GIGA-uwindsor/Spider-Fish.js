@@ -14,6 +14,7 @@ function BastardCircle(game, body)
   this.w = this.rad*2;
   this.h = this.rad*2;
 
+  this.isShooting = false
   this.shootingShrinkTrackerTicks = 0;
 }
 obj.extend(BastardCircle, Entity);
@@ -23,27 +24,28 @@ BastardCircle.prototype.update = function()
   this.x = this.body.x;
   this.y = this.body.y;
 
-  if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER])
-    this.shootingShrinkTrackerTicks += this.game.clockTick;
-  else if (this.shootingShrinkTrackerTicks <= CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING)
-    this.shootingShrinkTrackerTicks -= this.game.clockTick;
-  else
-    this.shootingShrinkTrackerTicks = CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING;
-
   // Either shrink from the player shooting, or grow a bit
-  if (this.shootingShrinkTrackerTicks > CONST.BASTERED_CIRCLE_FIRE_TIME_BEFORE_SHRINKING)
-    this.rad -= CONST.BASTERED_CIRCLE_SHRINK_RATE * this.game.clockTick; 
+  if (this.isShooting == true)
+  {
+	if (this.shootingShrinkTrackerTicks >= STANDARD.BASTERED_CIRCLE_FIRE_BULLETS_BEFORE_SHRINKING)
+	{
+		this.rad -= CONST.BASTERED_CIRCLE_SHRINK_RATE * this.game.clockTick;
+	}
+  }
   else
   {
     this.rad += this.growthRate * this.game.clockTick;
-
+	
+	if (this.shootingShrinkTrackerTicks > 0)
+	{
+		this.shootingShrinkTrackerTicks -= STANDARD.BASTERED_CIRCLE_CHARGE_SHRINK_RATE;
+	}
     if (this.rad > this.radMax)
       this.rad = this.radMax;
   }
 
   this.w = this.rad*2;
   this.h = this.rad*2;
-
   BastardCircle.zuper.update.call(this);
 }
 
@@ -125,4 +127,19 @@ BastardCircle.prototype.radIncrease = function(amount)
   {
     this.rad = CONST.BASTERED_CIRCLE_MAX_RAD;
   }
+}
+
+// Called to set the charge.
+BastardCircle.prototype.setShrinkCharge = function(amount)
+{
+	 this.shootingShrinkTrackerTicks += amount;
+}
+
+BastardCircle.prototype.ShootingState = function(currentState, amount)
+{
+	this.isShooting = currentState;
+	if (this.isShooting)
+	{
+		this.setShrinkCharge(amount);
+	}
 }
