@@ -67,9 +67,11 @@ PlayerShip.prototype.update = function()
   }
 
   this.checkWeapons();
+
   //update the current activeWeapons
-  this.shooting = this.weaponList[this.activeWeapon].update();
-  this.halo.ShootingState(this.shooting, this.weaponList[this.activeWeapon].bulletsPerShot());
+  var weapon = this.weaponList[this.activeWeapon];
+  weapon.update();
+  this.halo.setShootingState( weapon.isShooting, weapon.bulletsPerShot() );
 
   PlayerShip.zuper.update.call(this);
 }

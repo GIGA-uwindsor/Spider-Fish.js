@@ -46,6 +46,7 @@ BastardCircle.prototype.update = function()
 
   this.w = this.rad*2;
   this.h = this.rad*2;
+
   BastardCircle.zuper.update.call(this);
 }
 
@@ -135,7 +136,7 @@ BastardCircle.prototype.setShrinkCharge = function(amount)
 	 this.shootingShrinkTrackerTicks += amount;
 }
 
-BastardCircle.prototype.ShootingState = function(currentState, amount)
+BastardCircle.prototype.setShootingState = function(currentState, amount)
 {
 	this.isShooting = currentState;
 	if (this.isShooting)

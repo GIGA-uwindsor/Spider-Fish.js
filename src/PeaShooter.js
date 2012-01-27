@@ -17,12 +17,6 @@ function PeaShooter(game,body)
 }
 obj.extend(PeaShooter, HumanWeapon);
 
-PeaShooter.prototype.update = function() 
-{
-	var isShooting = PeaShooter.zuper.update.call(this);
-	return isShooting;
-}
-
 PeaShooter.prototype.draw = function() 
 {
   ctx.drawImage(
