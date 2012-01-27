@@ -10,6 +10,7 @@ function HumanWeapon(game, body, firingSpeed, name, id, imgStr)
   this.name = name;
   this.id = id;
   this.ammo = 0;
+  this.isShooting = false;
   if (imgStr) 
   {
     this.sprite = ASSET_MANAGER.getAsset(imgStr);
@@ -22,20 +23,18 @@ HumanWeapon.prototype.draw = function()
 
 HumanWeapon.prototype.update = function() 
 {
-  var bulletShoot = false;
+  this.isShooting = false;
   this.timeSinceLastShot += this.game.clockTick;
 
   if (this.game.keys[CONST.HUMAN_WEAPON_TRIGGER])
   {
-  
-		bulletShoot = true; 
-	if (this.timeSinceLastShot > 1.0/this.firingSpeed)
-	{
-		this.fire();
-		this.timeSinceLastShot = 0;
-	}
+    this.isShooting = true; 
+    if (this.timeSinceLastShot > 1.0/this.firingSpeed)
+    {
+      this.fire();
+      this.timeSinceLastShot = 0;
+    }
   }
-  return bulletShoot;
 }
 
 HumanWeapon.prototype.fire = function() 

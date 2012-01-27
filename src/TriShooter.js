@@ -16,12 +16,6 @@ function TriShooter(game,body)
 }
 obj.extend(TriShooter, HumanWeapon);
 
-TriShooter.prototype.update = function() 
-{
-  var isShooting = TriShooter.zuper.update.call(this);
-  return isShooting;
-}
-
 TriShooter.prototype.draw = function() 
 {
   ctx.drawImage(
