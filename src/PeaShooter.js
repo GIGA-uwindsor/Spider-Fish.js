@@ -19,7 +19,8 @@ obj.extend(PeaShooter, HumanWeapon);
 
 PeaShooter.prototype.update = function() 
 {
-  PeaShooter.zuper.update.call(this);
+	var isShooting = PeaShooter.zuper.update.call(this);
+	return isShooting;
 }
 
 PeaShooter.prototype.draw = function() 
@@ -43,4 +44,9 @@ PeaShooter.prototype.fire = function()
   PeaShooter.zuper.fire.call(this);
 }
 
+PeaShooter.prototype.bulletsPerShot = function()
+{
+	PeaShooter.zuper.bulletsPerShot.call(this);
+	return 1;
+}
 

@@ -18,7 +18,8 @@ obj.extend(TriShooter, HumanWeapon);
 
 TriShooter.prototype.update = function() 
 {
-  TriShooter.zuper.update.call(this);
+  var isShooting = TriShooter.zuper.update.call(this);
+  return isShooting;
 }
 
 TriShooter.prototype.draw = function() 
@@ -48,4 +49,8 @@ TriShooter.prototype.fire = function()
   TriShooter.zuper.fire.call(this);
 }
 
-
+TriShooter.prototype.bulletsPerShot = function()
+{
+	TriShooter.zuper.bulletsPerShot.call(this);
+	return 3;
+}
