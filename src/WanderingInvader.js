@@ -72,24 +72,14 @@ WanderingInvader.prototype.destroyOthers = function()
 
 WanderingInvader.prototype.collide = function() 
 {
-  var result = this.game.aabb.intersects(
-    new AabbTree.AxisAlignedBox(
-      [this.x - this.w/2, this.y - this.h/2],
-      [this.w, this.h]
-    )
-  );
-
-  for (id in result) 
+  var entities = this.game.getCollisions(this);
+  for (var i = 0; entity = entities[i]; i++)
   {
-    var entity = this.game.entities[id];
-    if (!entity.removeFromWorld) 
+    if (entity instanceof PlayerShip) 
     {
-      if (entity instanceof PlayerShip) 
-      {
-        this.removeFromWorld = true;
-        entity.health -= this.damage;
-        this.game.score += this.points;
-      }
+      this.removeFromWorld = true;
+      entity.health -= this.damage;
+      this.game.score += this.points;
     }
   }
   WanderingInvader.zuper.collide.call(this);

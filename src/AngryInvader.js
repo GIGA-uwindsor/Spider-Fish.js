@@ -20,24 +20,14 @@ AngryInvader.prototype.destroy = function()
 
 AngryInvader.prototype.collide = function() 
 {
-  var result = this.game.aabb.intersects(
-    new AabbTree.AxisAlignedBox(
-      [this.x - this.w/2, this.y - this.h/2],
-      [this.w, this.h]
-    )
-  );
-
-  for (id in result) 
+  var entities = this.game.getCollisions(this);
+  for (var i = 0,entity; entity = entities[i]; i++)
   {
-    var entity = this.game.entities[id];
-    if (!entity.removeFromWorld) 
+    if (entity instanceof PlayerShip) 
     {
-      if (entity instanceof PlayerShip) 
-      {
-        this.removeFromWorld = true;
-        entity.health -= CONST.ANGRY_INVADER_DAMAGE;
-        this.game.score += CONST.ANGRY_INVADER_POINTS;
-      }
+      this.removeFromWorld = true;
+      entity.health -= CONST.ANGRY_INVADER_DAMAGE;
+      this.game.score += CONST.ANGRY_INVADER_POINTS;
     }
   }
   AngryInvader.zuper.collide.call(this);
