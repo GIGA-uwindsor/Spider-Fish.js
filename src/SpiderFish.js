@@ -44,7 +44,6 @@ SpiderFish.prototype.update = function()
     this.backPos -= this.background.height;
   }
 
-
   //check player ships health
   if (this.playerShip.health <= 0) 
   {
