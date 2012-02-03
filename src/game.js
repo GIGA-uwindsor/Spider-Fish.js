@@ -2,7 +2,7 @@ var DEBUG = false;
 var CONST = STANDARD;
 var canvas = document.getElementById('surface');
 var ctx = canvas.getContext('2d');
-var game = new AimlessDonut();
+var game = new SpiderFish();
 var ASSET_MANAGER = new AssetManager();
 
 var z = new Bezier(4,
