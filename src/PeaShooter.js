@@ -17,11 +17,6 @@ function PeaShooter(game,body)
 }
 obj.extend(PeaShooter, HumanWeapon);
 
-PeaShooter.prototype.update = function() 
-{
-  PeaShooter.zuper.update.call(this);
-}
-
 PeaShooter.prototype.draw = function() 
 {
   ctx.drawImage(
@@ -43,4 +38,9 @@ PeaShooter.prototype.fire = function()
   PeaShooter.zuper.fire.call(this);
 }
 
+PeaShooter.prototype.bulletsPerShot = function()
+{
+	PeaShooter.zuper.bulletsPerShot.call(this);
+	return 1;
+}
 

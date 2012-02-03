@@ -16,11 +16,6 @@ function TriShooter(game,body)
 }
 obj.extend(TriShooter, HumanWeapon);
 
-TriShooter.prototype.update = function() 
-{
-  TriShooter.zuper.update.call(this);
-}
-
 TriShooter.prototype.draw = function() 
 {
   ctx.drawImage(
@@ -48,4 +43,8 @@ TriShooter.prototype.fire = function()
   TriShooter.zuper.fire.call(this);
 }
 
-
+TriShooter.prototype.bulletsPerShot = function()
+{
+	TriShooter.zuper.bulletsPerShot.call(this);
+	return 3;
+}
