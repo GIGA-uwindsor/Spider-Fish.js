@@ -16,11 +16,6 @@ function DoubleBarrel(game,body)
 }
 obj.extend(DoubleBarrel, HumanWeapon);
 
-DoubleBarrel.prototype.update = function() 
-{
-  DoubleBarrel.zuper.update.call(this);
-}
-
 DoubleBarrel.prototype.draw = function() 
 {
   ctx.drawImage(
@@ -47,4 +42,8 @@ DoubleBarrel.prototype.fire = function()
   DoubleBarrel.zuper.fire.call(this);
 }
 
-
+DoubleBarrel.prototype.bulletsPerShot = function()
+{
+	DoubleBarrel.zuper.bulletsPerShot.call(this);
+	return 2;
+}
