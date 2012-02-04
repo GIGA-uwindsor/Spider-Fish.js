@@ -35,8 +35,7 @@ var delay = new Pause(1.5, {x:0, y:0});
 var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
-	  
+    new Spawn(game, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
   ]
 );
 
