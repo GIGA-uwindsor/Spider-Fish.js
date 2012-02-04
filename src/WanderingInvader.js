@@ -22,7 +22,8 @@ WanderingInvader.prototype.destroy = function()
   if (this.explode) 
   {
     if (this.explosionRadius != 0)                           
-      this.game.addEntity(new Explosion(this.game, this.x, this.y, 0, this.explosionRadius));
+      this.game.addEntity(new DeadlyExplosion(this.game, this.x, this.y, 0, this.explosionRadius,
+			this.damage, this.w, this.h));//this.x - this.w/2, this.y - this.h/2));
     else
       this.game.addEntity(new Explosion(this.game, this.x, this.y));
 
@@ -37,7 +38,7 @@ WanderingInvader.prototype.destroy = function()
 WanderingInvader.prototype.destroyOthers = function()
 {
   //destroy others 
-  var aCounter = this.explosionRadius;
+  /*var aCounter = this.explosionRadius;
   var bCounter = 1;
 
   while (bCounter < this.explosionRadius)
@@ -67,7 +68,7 @@ WanderingInvader.prototype.destroyOthers = function()
     aCounter--;
     if (bCounter < this.explosionRadius)
       bCounter = Math.sqrt(this.explosionRadius*this.explosionRadius - aCounter*aCounter);
-  }
+  }*/
 }
 
 WanderingInvader.prototype.collide = function() 
