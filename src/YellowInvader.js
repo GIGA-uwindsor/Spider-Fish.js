@@ -1,6 +1,6 @@
-function YellowInvader(game, x, y, path)
+function YellowInvader(game, path)
 {
-  WanderingInvader.call(this, game, x, y, path,
+  WanderingInvader.call(this, game, path,
     CONST.YELLOW_INVADER_IMAGE,
     CONST.YELLOW_INVADER_HEALTH,
     CONST.YELLOW_INVADER_DAMAGE,

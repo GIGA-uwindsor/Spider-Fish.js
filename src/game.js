@@ -5,15 +5,6 @@ var ctx = canvas.getContext('2d');
 var game = new AimlessDonut();
 var ASSET_MANAGER = new AssetManager();
 
-var z = new Bezier(4,
-  [
-    {x:500, y:0},
-    {x:400, y:500},
-    {x:0, y:200},
-    {x:0, y:800}
-  ]
-);
-
 var a = new Bezier(4,
   [
     {x:0, y:0},
@@ -22,21 +13,20 @@ var a = new Bezier(4,
     {x:250, y:400}
   ]
 );
+var delay = new Pause(1.5, {x:250, y:400});
 var b = new Bezier(6,
   [
-    {x:0, y:0},
-    {x:500, y:100},
-    {x:-500, y:300},
-    {x:0, y:400}
+    {x:250, y:400},
+    {x:750, y:500},
+    {x:-250, y:700},
+    {x:250, y:800}
   ]
 );
-var delay = new Pause(1.5, {x:0, y:0});
 
 var level = new Level(game,
   [
-    //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
-	  
+    //game, spawn_start_time, number_to_spawn, spawn_interval, path, type of enemy
+    new Spawn(game, 0, 20, 2, new Path([a, delay, b]), YellowInvader),
   ]
 );
 

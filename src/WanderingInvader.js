@@ -1,11 +1,9 @@
 // An abstract class for types of enemies that will wander and shoot down
-function WanderingInvader(game, x, y, path, image, health, damage, points) 
+function WanderingInvader(game, path, image, health, damage, points) 
 {
-  Enemy.call(this, game, x, y, image, health);
+  Enemy.call(this, game, path.getX(0), path.getY(0), image, health);
   this.weapon = new OrbBlaster(this.game, this);
   this.path = path;
-  this.sx = x;
-  this.sy = y;
   
   this.damage = damage;
   this.points = points;
@@ -14,6 +12,7 @@ function WanderingInvader(game, x, y, path, image, health, damage, points)
   this.drop = false;
 
   this.explosionRadius = 0;
+  this.time = 0;
 }
 obj.extend(WanderingInvader, Enemy);
 
@@ -87,23 +86,13 @@ WanderingInvader.prototype.collide = function()
 
 WanderingInvader.prototype.update = function() 
 {
-  //traverse pathway
-  if (this.path.length == 0) 
+  this.time += this.game.clockTick;
+  this.x = this.path.getX(this.time);
+  this.y = this.path.getY(this.time);
+
+  if (this.offBottom()) 
   {
-    console.log("ran out of path");
     this.removeFromWorld = true;
-  }
-  else 
-  {
-    this.path[0].update(this.game.clockTick);
-    this.x = this.sx + this.path[0].getX();
-    this.y = this.sy + this.path[0].getY();
-    if (this.path[0].isDone()) 
-    {
-      this.sx = this.x;
-      this.sy = this.y;
-      this.path.splice(0, 1);
-    }
   }
 
   //make sure it still has health
@@ -115,11 +104,6 @@ WanderingInvader.prototype.update = function()
   }
 
   //check to see if its off the bottom of the screen
-  if (this.offBottom()) 
-  {
-    console.log("off the bottom");
-    this.removeFromWorld = true;
-  }
 
   //update weapon
   this.weapon.update();

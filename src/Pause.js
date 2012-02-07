@@ -1,29 +1,17 @@
-function Pause(duration) 
+function Pause(duration,point) 
 {
+  this.x = point.x;
+  this.y = point.y;
   Movement.call(this, duration);
 }
 obj.extend(Pause, Movement);
 
 Pause.prototype.getX = function(time) 
 {
-  return 0;
+  return this.x;
 }
 
 Pause.prototype.getY = function(time) 
 {
-  return 0;
-}
-
-Pause.prototype.update = function(ticks) 
-{
-  this.timeElapsed += ticks;
-  if (this.timeElapsed > this.duration) 
-  {
-    this.timeElapsed = this.duration;
-  }
-}
-
-Pause.prototype.isDone = function() 
-{
-  return this.timeElapsed >= this.duration;
+  return this.y;
 }
