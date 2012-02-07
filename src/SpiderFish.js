@@ -1,4 +1,4 @@
-function AimlessDonut() 
+function SpiderFish() 
 {
   GameEngine.call(this);
   this.lives = CONST.BEGIN_LIVES;
@@ -6,14 +6,14 @@ function AimlessDonut()
   this.backPos = 0;
   this.level = null;
 }
-obj.extend(AimlessDonut, GameEngine);
+obj.extend(SpiderFish, GameEngine);
 
-AimlessDonut.prototype.setLevel = function(level) 
+SpiderFish.prototype.setLevel = function(level) 
 {
   this.level = level;
 }
 
-AimlessDonut.prototype.start = function() 
+SpiderFish.prototype.start = function() 
 {
   if (this.level == null) 
   {
@@ -22,18 +22,18 @@ AimlessDonut.prototype.start = function()
   }
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
-  AimlessDonut.zuper.start.call(this);
+  SpiderFish.zuper.start.call(this);
 }
 
-AimlessDonut.prototype.clear = function() 
+SpiderFish.prototype.clear = function() 
 {
-  AimlessDonut.zuper.clear.call(this);
+  SpiderFish.zuper.clear.call(this);
   this.health = CONST.BEGIN_HEALTH;
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
 }
 
-AimlessDonut.prototype.update = function() 
+SpiderFish.prototype.update = function() 
 {
   this.level.update();
 
@@ -43,7 +43,6 @@ AimlessDonut.prototype.update = function()
   {
     this.backPos -= this.background.height;
   }
-
 
   //check player ships health
   if (this.playerShip.health <= 0) 
@@ -55,21 +54,21 @@ AimlessDonut.prototype.update = function()
   {
     this.running = false;
   }  
-  AimlessDonut.zuper.update.call(this);
+  SpiderFish.zuper.update.call(this);
 }
 
-AimlessDonut.prototype.preDraw = function()
+SpiderFish.prototype.preDraw = function()
 {
   this.drawBackground();
 }
 
-AimlessDonut.prototype.postDraw = function()
+SpiderFish.prototype.postDraw = function()
 {
   this.drawScore();
   this.drawLives();
 }
 
-AimlessDonut.prototype.drawBackground = function() 
+SpiderFish.prototype.drawBackground = function() 
 {
   if (this.background == null) 
   {
@@ -90,21 +89,21 @@ AimlessDonut.prototype.drawBackground = function()
   }
 }
 
-AimlessDonut.prototype.drawLives = function() 
+SpiderFish.prototype.drawLives = function() 
 {
   this.ctx.fillStyle = "green";
   this.ctx.font = "bold 1em Arial";
   this.ctx.fillText("Lives: " + this.lives, 10, this.ctx.canvas.height - 25);
 }
 
-AimlessDonut.prototype.drawScore = function() 
+SpiderFish.prototype.drawScore = function() 
 {
   this.ctx.fillStyle = "green";
   this.ctx.font = "bold 1em Arial";
   this.ctx.fillText("Score: " + this.score, 10, this.ctx.canvas.height - 10);
 }
 
-AimlessDonut.prototype.dropCollectable = function(x, y) 
+SpiderFish.prototype.dropCollectable = function(x, y) 
 {
   var n = Math.floor(Math.random() * 4);
   switch(n) 

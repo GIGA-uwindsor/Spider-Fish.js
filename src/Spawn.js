@@ -1,11 +1,11 @@
-function Spawn(game, time, numToSpawn, interval, path, type) 
+function Spawn(game, time, numToSpawn, interval, point, type) 
 {
   this.game = game;
   this.time = time;
   this.numToSpawn = numToSpawn;
   this.numSpawned = 0;
   this.interval = interval;
-  this.path = path;
+  this.point = point;
   this.type = type;
   this.elapsedTime = 0;
 }
@@ -22,10 +22,11 @@ Spawn.prototype.update = function()
   {
     this.numSpawned++;
     this.game.addEntity(new this.type
-        (
-         this.game,
-         this.path
-        )
-        );
+	  (
+        this.game,
+        this.point.x,
+        this.point.y
+      )
+    );
   }
 }
