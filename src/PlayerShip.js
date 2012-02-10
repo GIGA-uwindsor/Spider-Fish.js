@@ -76,11 +76,6 @@ PlayerShip.prototype.update = function()
   PlayerShip.zuper.update.call(this);
 }
 
-PlayerShip.prototype.collide = function() 
-{
-  PlayerShip.zuper.collide.call(this);
-}
-
 PlayerShip.prototype.checkWeapons = function() 
 {
   var countWeapons = this.weaponList.length;

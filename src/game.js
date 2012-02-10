@@ -5,20 +5,10 @@ var ctx = canvas.getContext('2d');
 var game = new SpiderFish();
 var ASSET_MANAGER = new AssetManager();
 
-var z = new Bezier(4,
-  [
-    {x:500, y:0},
-    {x:400, y:500},
-    {x:0, y:200},
-    {x:0, y:800}
-  ]
-);
-
 var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
     new Spawn(game, 0, 20, 2, {x:0, y:0}, YellowInvader),
-	  
   ]
 );
 

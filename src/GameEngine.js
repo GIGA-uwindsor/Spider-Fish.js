@@ -169,6 +169,24 @@ GameEngine.prototype.collide = function()
     }
   }
 }
+GameEngine.prototype.getCollisions = function(entity)
+{
+  var ids = this.aabb.intersects(
+    new AabbTree.AxisAlignedBox(
+      [entity.x - entity.w/2, entity.y - entity.h/2],
+      [entity.w, entity.h]
+    )
+  );
+  var res = [];
+  for (var id in ids)
+  {
+    if (!this.entities[id].removeFromWorld && this.entities[id] != entity)
+    {
+      res.push(this.entities[id]);
+    }
+  };
+  return res;
+};
 
 GameEngine.prototype.update = function() 
 {
