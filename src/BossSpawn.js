@@ -1,14 +1,12 @@
-function Spawn(game, time, numToSpawn, interval, point, type) 
+function BossSpawn(game, time, point, path, type) 
 {
   this.game = game;
   this.time = time;
-  this.numToSpawn = numToSpawn;
-  this.numSpawned = 0;
-  this.interval = interval;
   this.point = point;
+  this.path = flatten(path);
   this.type = type;
-  this.elapsedTime = 0;
 }
+obj.extend(BossSpawn, Spawn);
 
 Spawn.prototype.isDone = function() 
 {
@@ -17,7 +15,6 @@ Spawn.prototype.isDone = function()
 
 Spawn.prototype.update = function() 
 {
-  this.elapsedTime += this.game.clockTick;
   if (this.elapsedTime > this.time + this.interval*this.numSpawned)
   {
     this.numSpawned++;
@@ -25,7 +22,8 @@ Spawn.prototype.update = function()
 	  (
         this.game,
         this.point.x,
-        this.point.y
+        this.point.y,
+        obj.copy(this.path, new Array())
       )
     );
   }

@@ -49,13 +49,17 @@ Enemy.prototype.collide = function()
 
 Enemy.prototype.update = function() 
 {
-  this.movementPattern.update();
+  if (this.movementPattern != null)
+    this.movementPattern.update();
 
-  this.timeSinceLastShot += this.game.clockTick;
-  if (this.timeSinceLastShot > 1.0 / this.fireRate) 
+  if (this.firingPattern != null)
   {
-    this.firingPattern.fire();
-    this.timeSinceLastShot = 0;
+    this.timeSinceLastShot += this.game.clockTick;
+    if (this.timeSinceLastShot > 1.0 / this.fireRate) 
+    {
+      this.firingPattern.fire();
+      this.timeSinceLastShot = 0;
+    }
   }
 
   //make sure it still has health
