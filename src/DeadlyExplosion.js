@@ -1,74 +1,40 @@
-function DeadlyExplosion(game, x, y, which, explosionRadius, damage, centerX, centerY)
-{
-	Explosion.call(this, game, x, y, 0, explosionRadius);
+function DeadlyExplosion(game, x, y, explosionDiameter, damage, enemyHeight)
+{	//(x = position at x, y = position at y, explosionDiameter = diameter(ratio) of explosion,
+	//damage = damage delt to affected entity caught in explosion, 
+	//enemyHeight = height of enemy parent of explosion which is used to set diameter.
+	Explosion.call(this, game, x, y, 0, explosionDiameter);
 	this.damage = damage;
-	this.setDamage = true;
-	this.setX = x;
-	this.setY = y;
-	this.setCX = centerX;
-	this.setCY = centerY;
-	this.setRadius = explosionRadius*centerX;
-  //this.game.addEntity(new DeadlyExplosion(this.game, this.x, this.y, 0, this.explosionRadius));
+	this.isDamaging = true;
+	this.setDiameter = explosionDiameter*enemyHeight;
 }
 obj.extend(DeadlyExplosion, Explosion);
 
 DeadlyExplosion.prototype.collide = function() 
 {
-  var aCounter = this.explosionRadius;
-  var bCounter = 1;
-	//var damage = 10;
-	
 	var result = this.game.aabb.intersects( new AabbTree.AxisAlignedBox
-		([this.x - this.setCX/2,this.y - this.setCY/2],[this.setRadius,this.setRadius]));//this.w, this.h]) );
+		([this.x - this.setDiameter/2,this.y - this.setDiameter/2]
+		,[this.setDiameter,this.setDiameter]));
 		
 	for (id in result)
 	{
 		var entity = this.game.entities[id];
 		if (!entity.removeFromWorld)
 		{
-			if (entity instanceof PlayerShip)
+			if (entity instanceof PlayerShip)		//only affect enemy
 			{
-				if (this.setDamage)
+				if (this.isDamaging)
 				{
-					this.setDamage = false;
-					//this.removeFromWorld = true;
+					this.isDamaging = false;
 					entity.health -= this.damage;
 					this.game.score += this.points;
 				}
 			}
-			else
+			else																//affect other enemies (optional)
 			{
+				entity.health -= 5;
+				this.isDamaging = false;
 			}
 		}
 	}
-		
-  /*while (bCounter < this.explosionRadius)
-  {
-    var result = this.game.aabb.intersects(
-      new AabbTree.AxisAlignedBox(
-        [this.x - this.w/2, this.y - this.h/2],
-        [this.w*aCounter, this.h*bCounter]
-      )
-    );
-
-    for (id in result) 
-    {
-      var entity = this.game.entities[id];
-      if (!entity.removeFromWorld) 
-      {
-        if (entity instanceof PlayerShip) 
-        {
-          this.removeFromWorld = true;
-          entity.health -= this.damage;
-          this.game.score += this.points;
-          bCounter = this.explosionRadius;
-        }
-      }
-    }
-    WanderingInvader.zuper.collide.call(this);
-    aCounter--;
-    if (bCounter < this.explosionRadius)
-      bCounter = Math.sqrt(this.explosionRadius*this.explosionRadius - aCounter*aCounter);
-		*/	
-		DeadlyExplosion.zuper.collide.call(this);
+	DeadlyExplosion.zuper.collide.call(this);
 }

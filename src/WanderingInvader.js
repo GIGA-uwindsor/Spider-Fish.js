@@ -22,53 +22,14 @@ WanderingInvader.prototype.destroy = function()
   if (this.explode) 
   {
     if (this.explosionRadius != 0)                           
-      this.game.addEntity(new DeadlyExplosion(this.game, this.x, this.y, 0, this.explosionRadius,
-			this.damage, this.w, this.h));//this.x - this.w/2, this.y - this.h/2));
+      this.game.addEntity(new DeadlyExplosion(this.game, this.x, this.y, 
+				this.explosionDiameter, this.damage, this.h));
     else
       this.game.addEntity(new Explosion(this.game, this.x, this.y));
-
-    if (this.explosionRadius != 0)
-      this.destroyOthers(); 
 
     if (this.drop)
       this.game.dropCollectable(this.x, this.y);
   }
-}
-
-WanderingInvader.prototype.destroyOthers = function()
-{
-  //destroy others 
-  /*var aCounter = this.explosionRadius;
-  var bCounter = 1;
-
-  while (bCounter < this.explosionRadius)
-  {
-    var result = this.game.aabb.intersects(
-      new AabbTree.AxisAlignedBox(
-        [this.x - this.w/2, this.y - this.h/2],
-        [this.w*aCounter, this.h*bCounter]
-      )
-    );
-
-    for (id in result) 
-    {
-      var entity = this.game.entities[id];
-      if (!entity.removeFromWorld) 
-      {
-        if (entity instanceof PlayerShip) 
-        {
-          this.removeFromWorld = true;
-          entity.health -= this.damage;
-          this.game.score += this.points;
-          bCounter = this.explosionRadius;
-        }
-      }
-    }
-    WanderingInvader.zuper.collide.call(this);
-    aCounter--;
-    if (bCounter < this.explosionRadius)
-      bCounter = Math.sqrt(this.explosionRadius*this.explosionRadius - aCounter*aCounter);
-  }*/
 }
 
 WanderingInvader.prototype.collide = function() 
@@ -98,25 +59,6 @@ WanderingInvader.prototype.collide = function()
 
 WanderingInvader.prototype.update = function() 
 {
-  //traverse pathway
-  if (this.path.length == 0) 
-  {
-    console.log("ran out of path");
-    this.removeFromWorld = true;
-  }
-  else 
-  {
-    this.path[0].update(this.game.clockTick);
-    this.x = this.sx + this.path[0].getX();
-    this.y = this.sy + this.path[0].getY();
-    if (this.path[0].isDone()) 
-    {
-      this.sx = this.x;
-      this.sy = this.y;
-      this.path.splice(0, 1);
-    }
-  }
-
   //make sure it still has health
   if (this.health <= 0) 
   {
