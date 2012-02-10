@@ -35,7 +35,8 @@ var delay = new Pause(1.5, {x:0, y:0});
 var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-    new Spawn(game, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
+    new Spawn(game, 0, 20, 2, {x:0, y:0}, [a, delay, b], YellowInvader),
+	new Spawn(game, 50, 1, 1, {x:250, y:125}, [], BossInvader),
   ]
 );
 
@@ -45,6 +46,7 @@ ASSET_MANAGER.queueDownload(CONST.PEA_BULLET_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.BACKGROUND);
 ASSET_MANAGER.queueDownload(CONST.ORB_BULLET_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.PLAYER_SHIP_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.BOSS_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.YELLOW_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.ANGRY_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.ANGRY_MORPH_SHEET);

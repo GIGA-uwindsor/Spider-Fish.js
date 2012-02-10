@@ -1,10 +1,10 @@
-function Level(game, waves)
+function Level(game, spawns)
 {
   this.game = game;
-  if (waves) 
+  if (spawns) 
   {
-    this.waves = waves;
-    this.waves.sort(
+    this.spawns = spawns;
+    this.spawns.sort(
       function(a, b)
       {
         return a.time < b.time;
@@ -13,19 +13,19 @@ function Level(game, waves)
   }
   else 
   {
-    this.waves = [];
+    this.spawns = [];
   }
 }
 
 Level.prototype.isDone = function() 
 {
-  return this.waves.length == 0;
+  return this.spawns.length == 0;
 }
 
 Level.prototype.addSpawn = function(spawn) 
 {
-  this.waves.push(spawn);
-  this.waves.sort(
+  this.spawns.push(spawn);
+  this.spawns.sort(
     function(a, b)
     {
       return a.time < b.time;
@@ -35,17 +35,17 @@ Level.prototype.addSpawn = function(spawn)
 
 Level.prototype.update = function() 
 {
-  var numwaves = this.waves.length;
-  for (var i = 0; i < numwaves; i++) 
+  var numspawns = this.spawns.length;
+  for (var i = 0; i < numspawns; i++) 
   {
-    this.waves[i].update();
+    this.spawns[i].update();
   }
 
-  for (var i = numwaves-1; i >= 0; i--)
+  for (var i = numspawns-1; i >= 0; i--)
   {
-    if (this.waves[i].isDone()) 
+    if (this.spawns[i].isDone()) 
     {
-      this.waves.splice(i, 1);
+      this.spawns.splice(i, 1);
     }
   }
 }
