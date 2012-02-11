@@ -26,15 +26,13 @@ DeadlyExplosion.prototype.collide = function()
 				{
 					this.isDamaging = false;
 					entity.health -= this.damage;
-					this.game.score += this.points;
 				}
 			}
 			else																//affect other enemies (optional)
 			{
-				entity.health -= 5;
-				this.isDamaging = false;
 			}
 		}
 	}
+	
 	DeadlyExplosion.zuper.collide.call(this);
 }

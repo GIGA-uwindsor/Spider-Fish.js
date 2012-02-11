@@ -23,6 +23,6 @@ function YellowInvader(game, x, y)
     CONST.YELLOW_INVADER_HEALTH, CONST.YELLOW_INVADER_SPEED, CONST.YELLOW_INVADER_DAMAGE, CONST.YELLOW_INVADER_FIRE_RATE,
     new MovementPattern(this, movements), new SingleShotPattern(this)
   );
-  this.explosionRadius = 4;           //sets explosion to affect larger radius
+  this.explosionRadius = 8;           //sets explosion to affect larger radius
 }
 obj.extend(YellowInvader, Enemy);

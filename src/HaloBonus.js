@@ -4,30 +4,28 @@ function HaloBonus(game, x, y) {
 }
 obj.extend(HaloBonus,Collectable);
 
-HaloBonus.prototype.collide = function() {
-  var result = this.game.aabb.intersects(
-      new AabbTree.AxisAlignedBox(
-        [this.x-this.w/2,this.y-this.h/2],
-        [this.w,this.h]
-        ));
-  for (id in result) {
-    var entity = this.game.entities[id];
-    if (!entity.removeFromWorld) {
-      if (entity instanceof PlayerShip) {
-        entity.halo.radIncrease(CONST.HALO_BONUS_AMOUNT);
-        this.removeFromWorld = true;
-      }
+HaloBonus.prototype.collide = function()
+{
+  var entities = this.game.getCollisions(this);
+  for (var i = 0; entity = entities[i]; i++)
+  {
+    if (entity instanceof PlayerShip)
+    {
+      entity.halo.radIncrease(CONST.HALO_BONUS_AMOUNT);
+      this.removeFromWorld = true;
     }
   }
   HaloBonus.zuper.collide.call(this);
 }
 
-HaloBonus.prototype.update = function() {
+HaloBonus.prototype.update = function()
+{
   this.y += this.yVelo * this.game.clockTick;
   HaloBonus.zuper.update.call(this);
 }
 
-HaloBonus.prototype.draw = function(ctx) {
+HaloBonus.prototype.draw = function(ctx)
+{
   this.drawSpriteCentered(ctx);
   HaloBonus.zuper.draw.call(this,ctx);
 }

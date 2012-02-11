@@ -35,13 +35,13 @@ Level.prototype.addSpawn = function(spawn)
 
 Level.prototype.update = function() 
 {
-  var numSpawns = this.spawns.length;
-  for (var i = 0; i < numSpawns; i++) 
+  var numspawns = this.spawns.length;
+  for (var i = 0; i < numspawns; i++) 
   {
     this.spawns[i].update();
   }
 
-  for (var i = numSpawns-1; i >= 0; i--)
+  for (var i = numspawns-1; i >= 0; i--)
   {
     if (this.spawns[i].isDone()) 
     {

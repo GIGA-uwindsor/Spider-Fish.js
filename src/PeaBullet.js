@@ -20,26 +20,15 @@ PeaBullet.prototype.destroy = function()
 //
 PeaBullet.prototype.collide = function() 
 {
-  var result = this.game.aabb.intersects(
-    new AabbTree.AxisAlignedBox(
-      [this.x - this.w/2, this.y - this.h/2],
-      [this.w, this.h]
-    )
-  );
-
-  for (id in result) 
+  var entities = this.game.getCollisions(this);
+  for (var i = 0; entity = entities[i]; i++)
   {
-    var entity = this.game.entities[id];
-    if (!entity.removeFromWorld) 
+    if (entity instanceof Enemy) 
     {
-      if (entity instanceof Enemy) 
-      {
-        this.removeFromWorld = true;
-        this.explode = true;
-        entity.health -= CONST.PEA_BULLET_DAMAGE;
-
-        break;
-      }
+      this.removeFromWorld = true;
+      this.explode = true;
+      entity.health -= CONST.PEA_BULLET_DAMAGE;
+      break;
     }
   }
 }

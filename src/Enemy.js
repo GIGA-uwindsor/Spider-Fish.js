@@ -49,13 +49,17 @@ Enemy.prototype.collide = function()
 
 Enemy.prototype.update = function() 
 {
-  this.movementPattern.update();
+  if (this.movementPattern != null)
+    this.movementPattern.update();
 
-  this.timeSinceLastShot += this.game.clockTick;
-  if (this.timeSinceLastShot > 1.0 / this.fireRate) 
+  if (this.firingPattern != null)
   {
-    this.firingPattern.fire();
-    this.timeSinceLastShot = 0;
+    this.timeSinceLastShot += this.game.clockTick;
+    if (this.timeSinceLastShot > 1.0 / this.fireRate) 
+    {
+      this.firingPattern.fire();
+      this.timeSinceLastShot = 0;
+    }
   }
 
   //make sure it still has health
@@ -102,53 +106,15 @@ Enemy.prototype.drawHealthBar = function(ctx)
   ctx.restore();
 }
 
-Enemy.prototype.destroyOthers = function()
-{
-  //destroy others 
-  var aCounter = this.explosionRadius;
-  var bCounter = 1;
-
-  while (bCounter < this.explosionRadius)
-  {
-    var result = this.game.aabb.intersects(
-      new AabbTree.AxisAlignedBox(
-        [this.x - this.w/2, this.y - this.h/2],
-        [this.w*aCounter, this.h*bCounter]
-      )
-    );
-
-    for (id in result) 
-    {
-      var entity = this.game.entities[id];
-      if (!entity.removeFromWorld) 
-      {
-        if (entity instanceof PlayerShip) 
-        {
-          this.removeFromWorld = true;
-          entity.health -= this.collisionDamage;
-          this.game.score += this.points;
-          bCounter = this.explosionRadius;
-        }
-      }
-    }
-    Enemy.zuper.collide.call(this);
-    aCounter--;
-    if (bCounter < this.explosionRadius)
-      bCounter = Math.sqrt(this.explosionRadius*this.explosionRadius - aCounter*aCounter);
-  }
-}
-
 Enemy.prototype.destroy = function() 
 {
   if (this.explode) 
   {
     if (this.explosionRadius != 0)                           
-      this.game.addEntity(new Explosion(this.game, this.x, this.y, 0, this.explosionRadius));
+      this.game.addEntity(new DeadlyExplosion(this.game, this.x, this.y, 
+				this.explosionRadius, this.collisionDamage, this.h));
     else
       this.game.addEntity(new Explosion(this.game, this.x, this.y));
-
-    if (this.explosionRadius != 0)
-      this.destroyOthers(); 
 
     if (this.drop)
       this.game.dropCollectable(this.x, this.y);
