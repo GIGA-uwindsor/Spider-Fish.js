@@ -30,6 +30,10 @@ Entity.prototype.update = function()
 {
 }
 
+Entity.prototype.paused = function()
+{
+}
+
 Entity.prototype.draw = function(ctx) 
 {
   if (DEBUG) 

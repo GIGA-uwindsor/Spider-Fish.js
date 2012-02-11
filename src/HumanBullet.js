@@ -28,6 +28,12 @@ HumanBullet.prototype.update = function()
   }
 }
 
+HumanBullet.prototype.paused = function()
+{
+		console.log(this.game.paused);
+		this.lifeTicks += this.game.clockTick;	
+}
+
 HumanBullet.prototype.draw = function(ctx) 
 {
   HumanBullet.zuper.draw.call(this, ctx);

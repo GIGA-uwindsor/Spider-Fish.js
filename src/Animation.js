@@ -46,3 +46,8 @@ Animation.prototype.isDone = function()
 {
   return (this.elapsedTime >= this.totalTime);
 }
+
+Animation.prototype.paused = function(tick)
+{
+	this.elapsedTime -= tick;
+}
