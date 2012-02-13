@@ -1,6 +1,7 @@
 function GameEngine() 
 {
   this.running = true;
+	this.paused = false;
   this.entities = [];
   this.aabb = null;
   this.ctx = null;
@@ -22,8 +23,9 @@ GameEngine.prototype.init = function(ctx)
   this.surfaceHeight = this.ctx.canvas.height;
   this.halfSurfaceWidth = this.surfaceWidth/2;
   this.halfSurfaceHeight = this.surfaceHeight/2;
-  this.startInput();
-
+	this.Menu = new MainMenu(this.ctx, this);
+	this.startInput();
+  
   if (DEBUG)
     console.log('game initialized');
 }
@@ -36,7 +38,7 @@ GameEngine.prototype.start = function()
   (function gameLoop() 
   {
     that.loop();
-    if (that.running) 
+	if (that.running) 
     {
       requestAnimFrame(gameLoop, that.ctx.canvas);
     }
@@ -216,11 +218,21 @@ GameEngine.prototype.update = function()
   }
 }
 
+GameEngine.prototype.paused = function()
+{
+	var entitiesCount = this.entities.length;
+  for (var i = 0; i < entitiesCount; i++) 
+  {
+		var entity = this.entities[i];
+		entity.paused();
+  }
+}
+
 GameEngine.prototype.loop = function() 
 {
   this.clockTick = this.timer.tick();
   this.update();
-  this.draw();
+  this.draw();	
   this.collide();
   this.click = null;
 }

@@ -23,6 +23,7 @@ SpiderFish.prototype.start = function()
   this.playerShip = new PlayerShip(this);
   this.addEntity(this.playerShip);
   SpiderFish.zuper.start.call(this);
+  this.Menu.init();
 }
 
 SpiderFish.prototype.clear = function() 
@@ -35,26 +36,35 @@ SpiderFish.prototype.clear = function()
 
 SpiderFish.prototype.update = function() 
 {
-  this.level.update();
+	this.Menu.update();
+	if (this.paused == false)
+	{
+		this.level.update();
+		//move background
+		this.backPos += this.clockTick*CONST.BACKGROUND_SPEED;
+		if (this.background && this.backPos > this.background.height) 
+		{
+			this.backPos -= this.background.height;
+		}
 
-  //move background
-  this.backPos += this.clockTick*CONST.BACKGROUND_SPEED;
-  if (this.background && this.backPos > this.background.height) 
-  {
-    this.backPos -= this.background.height;
-  }
-
-  //check player ships health
-  if (this.playerShip.health <= 0) 
-  {
-    this.lives -= 1;
-    this.clear();
-  }
-  if (this.lives < 1) 
-  {
-    this.running = false;
-  }  
-  SpiderFish.zuper.update.call(this);
+		//check player ships health
+		if (this.playerShip.health <= 0) 
+		{
+			this.lives -= 1;
+			this.clear();
+		}
+		if (this.lives < 1) 
+		{
+			this.clear();
+			this.running = false;
+			this.Menu.draw();
+		}  
+		SpiderFish.zuper.update.call(this);
+	}
+	else
+	{
+		SpiderFish.zuper.paused.call(this);
+	}
 }
 
 SpiderFish.prototype.preDraw = function()
@@ -66,6 +76,10 @@ SpiderFish.prototype.postDraw = function()
 {
   this.drawScore();
   this.drawLives();
+	if (this.Menu.getVisibility())
+	{
+		this.Menu.draw();
+	}
 }
 
 SpiderFish.prototype.drawBackground = function() 
