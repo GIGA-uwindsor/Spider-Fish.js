@@ -220,11 +220,11 @@ GameEngine.prototype.update = function()
 
 GameEngine.prototype.paused = function()
 {
-	var entitiesCount = this.entities.length;
+  var entitiesCount = this.entities.length;
   for (var i = 0; i < entitiesCount; i++) 
   {
-		var entity = this.entities[i];
-		entity.paused();
+    var entity = this.entities[i];
+    entity.paused();
   }
 }
 
