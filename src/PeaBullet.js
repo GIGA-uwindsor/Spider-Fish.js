@@ -2,8 +2,7 @@ function PeaBullet(game, x, y, a)
 {
   var xv = Math.cos(a) * CONST.PEA_BULLET_SPEED;
   var yv = Math.sin(a) * CONST.PEA_BULLET_SPEED;
-  var life = 1;
-  HumanBullet.call(this, game, x, y, xv, yv, life, CONST.PEA_BULLET_IMAGE);
+  HumanBullet.call(this, game, x, y, xv, yv, CONST.PEA_BULLET_IMAGE);
 }
 obj.extend(PeaBullet, HumanBullet);
 

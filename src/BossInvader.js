@@ -6,8 +6,8 @@ function BossInvader(game, x, y)
   );
 
   this.possiblePatterns = [
-    new SingleShotPattern(this),
-    new SingleShotPattern(this)
+    new CurtainShotPattern(this),
+    new ClusterShotPattern(this)
   ];
 
   this.alternateWeaponDelay = 2;  // secs
