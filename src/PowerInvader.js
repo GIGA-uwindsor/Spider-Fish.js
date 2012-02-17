@@ -4,7 +4,7 @@ function PowerInvader(game, x, y)
     [
       {x:500, y:0},
       {x:250, y:0},
-      {x:0, y:400},
+      {x:500, y:400},
       {x:250, y:400}
     ]
   );
@@ -12,8 +12,8 @@ function PowerInvader(game, x, y)
   var b = new Bezier(6,
     [
       {x:0, y:0},
-      {x:500, y:100},
-      {x:-500, y:300},
+      {x:-500, y:100},
+      {x:500, y:300},
       {x:0, y:400}
     ]
   );
@@ -25,4 +25,4 @@ function PowerInvader(game, x, y)
   );
   this.explosionRadius = 4;           //sets explosion to affect larger radius
 }
-obj.extend(POWERInvader, Enemy);
+obj.extend(PowerInvader, Enemy);

@@ -127,7 +127,7 @@ SpiderFish.prototype.dropCollectable = function(x, y)
       break;
 
     case 1:
-      this.addEntity(new TriShooterAmmo(this, x, y, Math.PI/2));
+      this.addEntity(new TriShooterAmmo(this, x, y, 0));
       break;
 
     case 2:

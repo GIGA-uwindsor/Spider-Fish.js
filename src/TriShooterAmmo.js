@@ -1,7 +1,7 @@
 function TriShooterAmmo(game, x, y, a) 
 {
   Collectable.call(this, game, x, y, CONST.TRI_SHOOTER_AMMO_IMAGE);
-  this.yVelo = Math.sin(a) * CONST.ORB_BULLET_SPEED;
+  this.yVelo = a + CONST.TRI_SHOOTER_AMMO_SPEED;
 }
 obj.extend(TriShooterAmmo, Collectable);
 

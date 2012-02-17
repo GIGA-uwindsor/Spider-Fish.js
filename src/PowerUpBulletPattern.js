@@ -9,6 +9,6 @@ obj.extend(PowerUpBulletPattern, FiringPattern);
 
 PowerUpBulletPattern.prototype.fire = function()
 {
-  var bullet = new TriShooterAmmo(this.enemy.game, this.enemy.x, this.enemy.y, Math.PI/2);
+  var bullet = new TriShooterAmmo(this.enemy.game, this.enemy.x, this.enemy.y, 150);
   this.enemy.game.addEntity(bullet);
 }
