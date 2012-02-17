@@ -31,3 +31,8 @@ Explosion.prototype.draw = function(ctx)
   Entity.prototype.draw.call(this, ctx);
 }
 
+Explosion.prototype.paused = function()
+{
+	this.animation.paused(this.game.clockTick);
+}
+

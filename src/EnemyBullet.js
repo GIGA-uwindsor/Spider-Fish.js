@@ -12,11 +12,6 @@ function EnemyBullet(game, x, y, xv, yv, imgStr)
 }
 obj.extend(EnemyBullet, Entity);
 
-EnemyBullet.prototype.collide = function() 
-{
-  EnemyBullet.zuper.collide.call(this);
-}
-
 EnemyBullet.prototype.update = function() 
 {
   this.x += this.xVelo * this.game.clockTick;

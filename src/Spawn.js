@@ -1,4 +1,4 @@
-function Spawn(game, time, numToSpawn, interval, point, path, type) 
+function Spawn(game, time, numToSpawn, interval, point, type) 
 {
   this.game = game;
   this.time = time;
@@ -6,8 +6,6 @@ function Spawn(game, time, numToSpawn, interval, point, path, type)
   this.numSpawned = 0;
   this.interval = interval;
   this.point = point;
-  this.path = flatten(path);
-  this.path = flatten(path);
   this.type = type;
   this.elapsedTime = 0;
 }
@@ -27,8 +25,7 @@ Spawn.prototype.update = function()
 	  (
         this.game,
         this.point.x,
-        this.point.y,
-        obj.copy(this.path, new Array())
+        this.point.y
       )
     );
   }
