@@ -38,7 +38,7 @@ GameEngine.prototype.start = function()
   (function gameLoop() 
   {
     that.loop();
-	if (that.running) 
+	  if (that.running) 
     {
       requestAnimFrame(gameLoop, that.ctx.canvas);
     }

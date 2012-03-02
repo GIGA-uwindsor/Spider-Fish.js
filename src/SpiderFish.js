@@ -5,6 +5,7 @@ function SpiderFish()
   this.score = 0;
   this.backPos = 0;
   this.level = null;
+  this.music = null;
 }
 obj.extend(SpiderFish, GameEngine);
 
@@ -24,6 +25,8 @@ SpiderFish.prototype.start = function()
   this.addEntity(this.playerShip);
   SpiderFish.zuper.start.call(this);
   this.Menu.init();
+
+  this.music = new Sound("sound/light1_pre.ogg", false, true);
 }
 
 SpiderFish.prototype.clear = function() 
@@ -36,6 +39,9 @@ SpiderFish.prototype.clear = function()
 
 SpiderFish.prototype.update = function() 
 {
+  if (this.music != null && this.music.finished)
+    this.music = new Sound("sound/light1_loop.ogg", true, true);
+
   this.Menu.update();
   if (this.paused == false)
   {
