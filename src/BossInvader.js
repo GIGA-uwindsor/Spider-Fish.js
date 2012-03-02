@@ -12,6 +12,7 @@ function BossInvader(game, x, y)
 
   this.alternateWeaponDelay = 2;  // secs
   this.timeUntilAlternate = 0;
+  this.goingRight = true;
 
   this.nextPattern = 0;
 }
@@ -19,6 +20,7 @@ obj.extend(BossInvader, Enemy);
 
 BossInvader.prototype.update = function ()
 {
+  // Changing firing patterns
   if (this.timeUntilAlternate <= 0)
   {
     this.firingPattern = this.possiblePatterns[this.nextPattern];
@@ -29,8 +31,15 @@ BossInvader.prototype.update = function ()
 
     this.timeUntilAlternate = this.alternateWeaponDelay;
   }
-
   this.timeUntilAlternate -= this.game.clockTick;
+
+  // Moving back and forth
+  this.x += (this.goingRight ? 1 : -1) * this.game.clockTick * CONST.BOSS_INVADER_SPEED;
+
+  if (this.x < 50)
+    this.goingRight = true;
+  else if (this.x > 450)
+    this.goingRight = false;
 
   BossInvader.zuper.update.call(this);
 }
