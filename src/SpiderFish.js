@@ -2,7 +2,6 @@ function SpiderFish()
 {
   GameEngine.call(this);
   this.lives = CONST.BEGIN_LIVES;
-  this.score = 0;
   this.backPos = 0;
   this.level = null;
 }
@@ -57,7 +56,7 @@ SpiderFish.prototype.update = function()
     {
       this.clear();
       this.running = false;
-      this.Menu.draw();
+      this.Menu.draw(this.score.getScore);
     }  
     SpiderFish.zuper.update.call(this);
   }
@@ -78,7 +77,7 @@ SpiderFish.prototype.postDraw = function()
   this.drawLives();
   if (this.Menu.getVisibility())
   {
-    this.Menu.draw();
+    this.Menu.draw(this.score.getScore());
   }
 }
 
@@ -106,15 +105,15 @@ SpiderFish.prototype.drawBackground = function()
 SpiderFish.prototype.drawLives = function() 
 {
   this.ctx.fillStyle = "green";
-  this.ctx.font = "bold 1em Arial";
-  this.ctx.fillText("Lives: " + this.lives, 10, this.ctx.canvas.height - 25);
+  this.ctx.font = "bold Arial";
+  this.ctx.fillText("Lives: " + this.lives, 10, this.ctx.canvas.height - 35);
 }
 
 SpiderFish.prototype.drawScore = function() 
 {
   this.ctx.fillStyle = "green";
-  this.ctx.font = "bold 1em Arial";
-  this.ctx.fillText("Score: " + this.score, 10, this.ctx.canvas.height - 10);
+  this.ctx.font = "bold Arial";
+  this.ctx.fillText("Score: " + this.score.getScore(), 10, this.ctx.canvas.height - 10);
 }
 
 SpiderFish.prototype.dropCollectable = function(x, y) 

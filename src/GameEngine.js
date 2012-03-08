@@ -14,6 +14,7 @@ function GameEngine()
   this.surfaceHeight = null;
   this.halfSurfaceWidth = null;
   this.halfSurfaceHeight = null;
+  this.score = new Score();
 }
 
 GameEngine.prototype.init = function(ctx) 
@@ -110,7 +111,12 @@ GameEngine.prototype.clear = function()
   {
     var entity = this.entities[i];
     entity.removeFromWorld = true;
+    if (this.entities[i] instanceof Enemy)
+    {
+      this.entities[i].givePoints = false;
+    }
   }
+  this.score.set(0)
 }
 
 GameEngine.prototype.addEntity = function(entity) 
@@ -207,6 +213,10 @@ GameEngine.prototype.update = function()
   {
     if (this.entities[i].removeFromWorld) 
     {
+      if (this.entities[i] instanceof Enemy && this.entities[i].givePoints)
+      {
+        this.score.inc(this.entities[i].points);
+      }
       this.entities[i].destroy();
       this.entities.splice(i, 1);
     }

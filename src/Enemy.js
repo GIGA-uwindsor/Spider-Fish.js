@@ -19,6 +19,9 @@ function Enemy(game, x, y, imgStr, points,
   this.timeSinceLastShot = 0;
   this.explode = false;
   this.explosionRadius = 0;
+  // Can be redefined to grant greater point values for different enemy types.
+  this.points = 2;
+  this.givePoints = false;
 }
 obj.extend(Enemy, Entity);
 
@@ -40,7 +43,7 @@ Enemy.prototype.collide = function()
       {
         this.removeFromWorld = true;
         entity.health -= this.collisionDamage;
-        this.game.score += this.points;
+        this.givePoints = true;
       }
     }
   }
@@ -68,6 +71,7 @@ Enemy.prototype.update = function()
     this.explode = true;
     this.removeFromWorld = true;
     this.drop = true;
+    this.givePoints = true;
   }
 
   //check to see if its off the bottom of the screen
