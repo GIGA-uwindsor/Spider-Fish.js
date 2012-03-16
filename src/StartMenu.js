@@ -2,7 +2,7 @@ function StartMenu(ctx, game)
 {
 	this.game = game;
 	this.visible = false;
-	this.ctx = ctx;
+	this.ctx = ctx
 }
 obj.extend(StartMenu, MainMenu)
 

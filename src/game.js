@@ -13,7 +13,7 @@ var level = new Level(game,
   ]
 );
 
-game.LoadLevel.setLevel(level);
+game.setLevel(level);
 
 ASSET_MANAGER.queueDownload(CONST.PEA_BULLET_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.BACKGROUND);

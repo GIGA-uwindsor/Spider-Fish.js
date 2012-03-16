@@ -63,12 +63,12 @@ MainMenu.prototype.startGame = function()
   var level = new Level(game,
     [
       //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
-			new Spawn(game, 0, 20, 2, {x:0, y:0}, YellowTriInvader),
-			new Spawn(game, 10, 1, 1, {x:250, y:125}, BossInvader),
+      new Spawn(game, 0, 20, 2, {x:0, y:0}, YellowInvader),
+      new Spawn(game, 50, 1, 1, {x:250, y:125}, BossInvader),
     ]
   );
 
-  game.LoadLevel.setLevel(level);
+  game.setLevel(level);
 
   ASSET_MANAGER.queueDownload(CONST.PEA_BULLET_IMAGE);
   ASSET_MANAGER.queueDownload(CONST.BACKGROUND);

@@ -24,6 +24,8 @@ function PlayerShip(game)
 
   this.shooting = false;
   
+	this.empBomb = new EmpBomb(this, game);
+	
   this.ammo_imgs = [
     ASSET_MANAGER.getAsset(CONST.PEA_SHOOTER_AMMO_IMAGE),
     ASSET_MANAGER.getAsset(CONST.DOUBLE_BARREL_AMMO_IMAGE),
@@ -74,6 +76,8 @@ PlayerShip.prototype.update = function()
   this.halo.setShootingState( weapon.isShooting, weapon.bulletsPerShot() );
 
   PlayerShip.zuper.update.call(this);
+	
+	this.empBomb.update(this.game);
 }
 
 PlayerShip.prototype.checkWeapons = function() 
@@ -181,6 +185,7 @@ PlayerShip.prototype.draw = function(ctx)
 {
   this.drawWeapons(ctx);
   this.drawHealthBar(ctx);
+	this.empBomb.draw(ctx, this.w, this.h, this.x, this.y);
   this.weaponList[this.activeWeapon].draw(ctx);
   this.drawSpriteCentered(ctx);
   PlayerShip.zuper.draw.call(this, ctx);
