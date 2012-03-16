@@ -12,7 +12,8 @@ DoubleBarrelAmmo.prototype.collide = function()
   {
     if (entity instanceof PlayerShip) 
     {
-      entity.addAmmo(CONST.DOUBLE_BARREL_AMMO_ID, CONST.DOUBLE_BARREL_AMMO_AMMO);
+      entity.activeWeapon = entity.weaponList[1];
+	  entity.gunTime = 10;
       this.removeFromWorld = true;
     }
   }

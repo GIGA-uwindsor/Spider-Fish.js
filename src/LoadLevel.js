@@ -99,21 +99,13 @@ LoadLevel.prototype.drawBackground = function()
 
 LoadLevel.prototype.dropCollectable = function(x, y) 
 {
-  var n = Math.floor(Math.random() * 4);
+  var n = Math.floor(Math.random() * 2);
   switch(n) 
   {
     case 0:
       this.game.addEntity(new HealthItem(this.game, x, y));
       break;
-
     case 1:
-      this.game.addEntity(new TriShooterAmmo(this.game, x, y));
-      break;
-
-    case 2:
-      this.game.addEntity(new DoubleBarrelAmmo(this.game, x, y));
-      break;
-    case 3:
       this.game.addEntity(new HaloBonus(this.game,x,y));
       break;
     default:
