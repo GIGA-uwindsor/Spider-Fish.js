@@ -117,6 +117,6 @@ Enemy.prototype.destroy = function()
       this.game.addEntity(new Explosion(this.game, this.x, this.y));
 
     if (this.drop)
-      this.game.dropCollectable(this.x, this.y);
+      this.game.LoadLevel.dropCollectable(this.x, this.y);
   }
 }
