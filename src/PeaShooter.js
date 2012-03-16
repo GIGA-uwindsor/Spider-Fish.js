@@ -13,7 +13,6 @@ function PeaShooter(game,body)
     CONST.PEA_SHOOTER_ID,
     CONST.PEA_SHOOTER_IMAGE
   );
-  this.ammo = -1;
 }
 obj.extend(PeaShooter, HumanWeapon);
 

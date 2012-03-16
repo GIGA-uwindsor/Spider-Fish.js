@@ -9,7 +9,6 @@ function HumanWeapon(game, body, firingSpeed, name, id, imgStr)
   this.timeSinceLastShot = 0;
   this.name = name;
   this.id = id;
-  this.ammo = 0;
   this.isShooting = false;
   if (imgStr) 
   {

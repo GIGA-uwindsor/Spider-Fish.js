@@ -9,6 +9,7 @@ var level = new Level(game,
   [
     //game, spawn_start_time, number_to_spawn, spawn_interval, start_xy, path, type of enemy
     new Spawn(game, 0, 20, 2, {x:0, y:0}, YellowTriInvader),
+	new Spawn(game, 0, 20, 2, {x:0, y:0}, PowerInvader),
     new Spawn(game, 10, 1, 1, {x:250, y:125}, BossInvader),
   ]
 );
@@ -21,6 +22,7 @@ ASSET_MANAGER.queueDownload(CONST.ORB_BULLET_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.PLAYER_SHIP_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.BOSS_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.YELLOW_INVADER_IMAGE);
+ASSET_MANAGER.queueDownload(CONST.POWER_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.ANGRY_INVADER_IMAGE);
 ASSET_MANAGER.queueDownload(CONST.ANGRY_MORPH_SHEET);
 ASSET_MANAGER.queueDownload(CONST.TRI_SHOOTER_IMAGE);

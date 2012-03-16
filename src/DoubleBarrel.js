@@ -28,11 +28,7 @@ DoubleBarrel.prototype.draw = function()
 
 DoubleBarrel.prototype.fireBullet = function(x) 
 {
-  if (this.ammo > 0) 
-  {
-    this.ammo -= 1;
-    this.game.addEntity(new PeaBullet(this.game, x, this.body.y, Math.PI/2 * 3));
-  }
+	this.game.addEntity(new PeaBullet(this.game, x, this.body.y, Math.PI/2 * 3));
 }
 
 DoubleBarrel.prototype.fire = function() 

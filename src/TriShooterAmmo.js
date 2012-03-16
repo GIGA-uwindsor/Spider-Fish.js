@@ -1,7 +1,7 @@
-function TriShooterAmmo(game, x, y) 
+function TriShooterAmmo(game, x, y, a) 
 {
   Collectable.call(this, game, x, y, CONST.TRI_SHOOTER_AMMO_IMAGE);
-  this.yVelo = CONST.TRI_SHOOTER_AMMO_SPEED;
+  this.yVelo = a + CONST.TRI_SHOOTER_AMMO_SPEED;
 }
 obj.extend(TriShooterAmmo, Collectable);
 
@@ -12,7 +12,8 @@ TriShooterAmmo.prototype.collide = function()
   {
     if (entity instanceof PlayerShip) 
     {
-      entity.addAmmo(CONST.TRI_SHOOTER_AMMO_ID, CONST.TRI_SHOOTER_AMMO_AMMO);
+      entity.activeWeapon = 2;
+	  entity.gunTime = 50;
       this.removeFromWorld = true;
     }
   }
@@ -25,7 +26,7 @@ TriShooterAmmo.prototype.update = function()
   TriShooterAmmo.zuper.update.call(this);
 }
 
-TriShooterAmmo.prototype.draw = function(ctx) 
+TriShooterAmmo.prototype.draw = function(ctx)
 {
   this.drawSpriteCentered(ctx);
   TriShooterAmmo.zuper.draw.call(this, ctx);

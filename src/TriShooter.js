@@ -28,11 +28,7 @@ TriShooter.prototype.draw = function()
 
 TriShooter.prototype.fireBullet = function(angle) 
 {
-  if (this.ammo > 0) 
-  {
-    this.ammo -= 1;
     this.game.addEntity(new PeaBullet(this.game, this.body.x, this.body.y, angle));
-  }
 }
 
 TriShooter.prototype.fire = function() 
