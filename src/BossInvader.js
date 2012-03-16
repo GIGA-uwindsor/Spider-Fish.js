@@ -9,8 +9,6 @@ function BossInvader(game, x, y)
     new CurtainShotPattern(this),
     new ClusterShotPattern(this)
   ];
-  // how many points this type of enemy should give.
-  this.points = 101
   this.alternateWeaponDelay = 2;  // secs
   this.timeUntilAlternate = 0;
   this.goingRight = true;

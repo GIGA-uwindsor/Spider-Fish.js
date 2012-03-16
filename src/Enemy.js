@@ -19,8 +19,7 @@ function Enemy(game, x, y, imgStr, points,
   this.timeSinceLastShot = 0;
   this.explode = false;
   this.explosionRadius = 0;
-  // Can be redefined to grant greater point values for different enemy types.
-  this.points = 2;
+  this.points = points;
   this.givePoints = false;
 }
 obj.extend(Enemy, Entity);
@@ -41,9 +40,9 @@ Enemy.prototype.collide = function()
     {
       if (entity instanceof PlayerShip) 
       {
-        this.removeFromWorld = true;
-        entity.health -= this.collisionDamage;
-        this.givePoints = true;
+  		  this.removeFromWorld = true;
+			  entity.health -= this.collisionDamage;
+			  this.givePoints = true;
       }
     }
   }
