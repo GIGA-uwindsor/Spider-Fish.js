@@ -23,8 +23,6 @@ GameEngine.prototype.init = function(ctx)
   this.surfaceHeight = this.ctx.canvas.height;
   this.halfSurfaceWidth = this.surfaceWidth/2;
   this.halfSurfaceHeight = this.surfaceHeight/2;
-	this.Menu = new MainMenu(this.ctx, this);
-	this.StartMenu = new StartMenu(this.ctx, this);
 	this.startInput();
   
   if (DEBUG)

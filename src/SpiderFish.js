@@ -8,6 +8,14 @@ function SpiderFish()
 }
 obj.extend(SpiderFish, GameEngine);
 
+SpiderFish.prototype.init = function(ctx)
+{
+  SpiderFish.zuper.init.call(this, ctx);
+
+  this.Menu = new MainMenu(this.ctx, this);
+	this.StartMenu = new StartMenu(this.ctx, this);
+}
+
 SpiderFish.prototype.setLevel = function(level) 
 {
   this.level = level;
