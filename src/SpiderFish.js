@@ -8,6 +8,14 @@ function SpiderFish()
 }
 obj.extend(SpiderFish, GameEngine);
 
+SpiderFish.prototype.init = function(ctx)
+{
+  SpiderFish.zuper.init.call(this, ctx);
+
+  this.Menu = new MainMenu(this.ctx, this);
+	this.StartMenu = new StartMenu(this.ctx, this);
+}
+
 SpiderFish.prototype.setLevel = function(level) 
 {
   this.level = level;
@@ -24,6 +32,7 @@ SpiderFish.prototype.start = function()
   this.addEntity(this.playerShip);
   SpiderFish.zuper.start.call(this);
   this.Menu.init();
+	this.StartMenu.init();
 }
 
 SpiderFish.prototype.clear = function() 
@@ -36,7 +45,15 @@ SpiderFish.prototype.clear = function()
 
 SpiderFish.prototype.update = function() 
 {
-  this.Menu.update();
+	if (this.Menu.getVisibility())	//only allow start menu to come up from regular menu
+	{
+		this.StartMenu.update();
+	}
+	if (!this.StartMenu.getVisibility())	//only allow regular menu to change current update if start menu not visible
+	{
+		this.Menu.update();
+	}
+	
   if (this.paused == false)
   {
     this.level.update();
@@ -57,7 +74,7 @@ SpiderFish.prototype.update = function()
     {
       this.clear();
       this.running = false;
-      this.Menu.draw();
+      this.StartMenu.draw();
     }  
     SpiderFish.zuper.update.call(this);
   }
@@ -80,6 +97,10 @@ SpiderFish.prototype.postDraw = function()
   {
     this.Menu.draw();
   }
+	if (this.StartMenu.getVisibility())
+	{
+		this.StartMenu.draw();
+	}
 }
 
 SpiderFish.prototype.drawBackground = function() 
