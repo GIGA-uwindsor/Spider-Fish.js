@@ -9,7 +9,6 @@ function BossInvader(game, x, y)
     new CurtainShotPattern(this),
     new ClusterShotPattern(this)
   ];
-
   this.alternateWeaponDelay = 2;  // secs
   this.timeUntilAlternate = 0;
   this.goingRight = true;

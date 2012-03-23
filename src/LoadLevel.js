@@ -1,7 +1,6 @@
 function LoadLevel(game)
 {
   this.lives = CONST.BEGIN_LIVES;
-	this.score = 0;
   this.backPos = 0;
 	this.game = game;
 	this.level = null;
@@ -65,15 +64,15 @@ LoadLevel.prototype.postDraw = function()
 LoadLevel.prototype.drawLives = function() 
 {
   this.game.ctx.fillStyle = "green";
-  this.game.ctx.font = "bold 1em Arial";
-  this.game.ctx.fillText("Lives: " + this.lives, 10, this.game.ctx.canvas.height - 25);
+  this.game.ctx.font = "bold Arial";
+  this.game.ctx.fillText("Lives: " + this.lives, 10, this.game.ctx.canvas.height - 35);
 }
 
 LoadLevel.prototype.drawScore = function() 
 {
   this.game.ctx.fillStyle = "green";
-  this.game.ctx.font = "bold 1em Arial";
-  this.game.ctx.fillText("Score: " + this.score, 10, this.game.ctx.canvas.height - 10);
+  this.game.ctx.font = "bold Arial";
+  this.game.ctx.fillText("Score: " + this.game.score.getScore(), 10, this.game.ctx.canvas.height - 10);
 }
 
 LoadLevel.prototype.drawBackground = function() 

@@ -38,7 +38,6 @@ function AngryInvader(game, x, y)
   
   this.xVelo = 0;
   this.yVelo = CONST.ANGRY_INVADER_SPEED;
-
   //cause the wave to happen
   this.cx = x;      //center of the wave
   this.cy = y;

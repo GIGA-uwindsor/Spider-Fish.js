@@ -19,6 +19,8 @@ function Enemy(game, x, y, imgStr, points,
   this.timeSinceLastShot = 0;
   this.explode = false;
   this.explosionRadius = 0;
+  this.points = points;
+  this.givePoints = false;
 }
 obj.extend(Enemy, Entity);
 
@@ -38,9 +40,9 @@ Enemy.prototype.collide = function()
     {
       if (entity instanceof PlayerShip) 
       {
-        this.removeFromWorld = true;
-        entity.health -= this.collisionDamage;
-        this.game.score += this.points;
+  		  this.removeFromWorld = true;
+			  entity.health -= this.collisionDamage;
+			  this.givePoints = true;
       }
     }
   }
@@ -68,6 +70,7 @@ Enemy.prototype.update = function()
     this.explode = true;
     this.removeFromWorld = true;
     this.drop = true;
+    this.givePoints = true;
   }
 
   //check to see if its off the bottom of the screen

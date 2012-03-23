@@ -2,7 +2,7 @@ function MainMenu(ctx, game)
 {
   this.game = game;
   this.visible = false;
-  this.ctx = ctx
+  this.ctx = ctx;
 }
 
 MainMenu.prototype.init = function()
@@ -11,7 +11,7 @@ MainMenu.prototype.init = function()
   this.draw();
 }
 
-MainMenu.prototype.draw = function()
+MainMenu.prototype.draw = function(score)
 {
   this.visible = true;
   this.ctx.fillStyle = "red";
@@ -22,6 +22,7 @@ MainMenu.prototype.draw = function()
   this.ctx.globalAlpha = 1.0;  
   this.ctx.fillText("Press Spacebar to start the game!", this.game.surfaceWidth/11, this.game.surfaceHeight/2);
   this.ctx.fillText("Arrow keys to move, and Z to fire.", this.game.surfaceWidth/11, this.game.surfaceHeight/1.8);
+  this.ctx.fillText("Score: "+score, this.game.surfaceWidth/3, this.game.surfaceHeight/1.6);
 
   if (this.game.running == false)
   {

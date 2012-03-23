@@ -1,8 +1,8 @@
 function SpiderFish() 
 {
   GameEngine.call(this);
-	this.LoadLevel = new LoadLevel(this);
-	this.startedLevel = false;
+  this.LoadLevel = new LoadLevel(this);
+  this.startedLevel = false;
 }
 obj.extend(SpiderFish, GameEngine);
 
@@ -53,7 +53,8 @@ SpiderFish.prototype.update = function()
 	
   if (this.paused == false)
   {
-		this.LoadLevel.update();
+    this.LoadLevel.update();
+
     SpiderFish.zuper.update.call(this);
   }
   else
@@ -72,7 +73,7 @@ SpiderFish.prototype.postDraw = function()
 	this.LoadLevel.postDraw();
   if (this.Menu.getVisibility())
   {
-    this.Menu.draw();
+    this.Menu.draw(this.score.getScore());
   }
 	if (this.StartMenu.getVisibility())
 	{
