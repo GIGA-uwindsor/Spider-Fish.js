@@ -139,8 +139,15 @@ GameEngine.prototype.draw = function()
   this.preDraw();
   var entitiesCount = this.entities.length;
   for (var i = 0; i < entitiesCount; i++) 
-  {
-    this.entities[i].draw(this.ctx);
+  {  
+    if (this.entities[i].respawnTime > 0)
+    {
+      this.entities[i].respawnTime--;
+    }
+    else
+    {
+      this.entities[i].draw(this.ctx);
+    }
   }
   this.postDraw();
 }
@@ -160,12 +167,15 @@ GameEngine.prototype.collide = function()
     var entity = this.entities[i];
     if (!entity.removeFromWorld) 
     {
-      this.aabb.add(i,
-        new AabbTree.AxisAlignedBox(
-          [entity.x - entity.w/2, entity.y - entity.h/2],
-          [entity.w, entity.h]
-        )
-      );
+      if (!entity.invulnerable)
+      {
+        this.aabb.add(i,
+          new AabbTree.AxisAlignedBox(
+            [entity.x - entity.w/2, entity.y - entity.h/2],
+            [entity.w, entity.h]
+          )
+        );
+      }
     }
   }
   for (var i = 0; i < entitiesCount; i++) 
@@ -190,12 +200,12 @@ GameEngine.prototype.getCollisions = function(entity)
   {
     if (!this.entities[id].removeFromWorld && this.entities[id] != entity)
     {
-      res.push(this.entities[id]);
+			res.push(this.entities[id]);
     }
   };
   return res;
 };
-
+ 
 GameEngine.prototype.update = function() 
 {
   var entitiesCount = this.entities.length;

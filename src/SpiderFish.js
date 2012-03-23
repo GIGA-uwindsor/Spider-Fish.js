@@ -50,7 +50,7 @@ SpiderFish.prototype.update = function()
     if (this.playerShip.health <= 0) 
     {
       this.lives -= 1;
-      this.clear();
+      this.setInvulnerable();
     }
     if (this.lives < 1) 
     {
@@ -64,6 +64,25 @@ SpiderFish.prototype.update = function()
   {
     SpiderFish.zuper.paused.call(this);
   }
+}
+
+SpiderFish.prototype.setInvulnerable = function()
+{
+  var entitiesCount = this.entities.length;
+  for (var i = 0; i < entitiesCount; i++) 
+  {
+    var entity = this.entities[i];
+    if (this.entities[i] instanceof PlayerShip || this.entities[i] instanceof BastardCircle)
+    {
+      this.entities[i].removeFromWorld = true;
+    }
+  }
+  this.health = CONST.BEGIN_HEALTH;
+  this.playerShip = new PlayerShip(this);
+  this.addEntity(this.playerShip);
+  this.playerShip.halo.respawnTime = STANDARD.PLAYER_SHIP_RESPAWN_TIME;
+  this.playerShip.respawnTime = STANDARD.PLAYER_SHIP_RESPAWN_TIME;
+  this.playerShip.invulnerable = STANDARD.PLAYER_SHIP_INVULNERABLE_TIME;
 }
 
 SpiderFish.prototype.preDraw = function()

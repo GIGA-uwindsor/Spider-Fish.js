@@ -14,7 +14,9 @@ function Entity(game, x, y, imgStr)
     this.w = this.sprite.width;
     this.h = this.sprite.height;
   }
-
+  this.invulnerable = 0;
+  this.timeTillFlash = 1;
+  this.respawnTime = 0;
   this.removeFromWorld = false;
 }
 

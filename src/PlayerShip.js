@@ -21,9 +21,7 @@ function PlayerShip(game)
   this.halo = new BastardCircle(this.game,this);
   this.game.addEntity(this.halo);
   this.health = CONST.PLAYER_SHIP_HEALTH;
-
   this.shooting = false;
-  
   this.ammo_imgs = [
     ASSET_MANAGER.getAsset(CONST.PEA_SHOOTER_AMMO_IMAGE),
     ASSET_MANAGER.getAsset(CONST.DOUBLE_BARREL_AMMO_IMAGE),
@@ -70,9 +68,15 @@ PlayerShip.prototype.update = function()
 
   //update the current activeWeapons
   var weapon = this.weaponList[this.activeWeapon];
-  weapon.update();
-  this.halo.setShootingState( weapon.isShooting, weapon.bulletsPerShot() );
-
+  if (this.invulnerable == 0)
+  {
+    weapon.update();
+    this.halo.setShootingState( weapon.isShooting, weapon.bulletsPerShot() );
+  }
+  else
+  {
+    this.invulnerable -= 1;
+  }
   PlayerShip.zuper.update.call(this);
 }
 
@@ -179,10 +183,17 @@ PlayerShip.prototype.drawHealthBar = function(ctx)
 
 PlayerShip.prototype.draw = function(ctx) 
 {
+  if (this.invulnerable != 0 && this.invulnerable%this.timeTillFlash <= 2)
+  {
+    this.timeTillFlash += 1;
+  }
+  else 
+  {
+    this.drawHealthBar(ctx);
+    this.weaponList[this.activeWeapon].draw(ctx);
+    this.drawSpriteCentered(ctx);
+  }
   this.drawWeapons(ctx);
-  this.drawHealthBar(ctx);
-  this.weaponList[this.activeWeapon].draw(ctx);
-  this.drawSpriteCentered(ctx);
   PlayerShip.zuper.draw.call(this, ctx);
 }
 

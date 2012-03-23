@@ -40,9 +40,16 @@ Enemy.prototype.collide = function()
     {
       if (entity instanceof PlayerShip) 
       {
-  		  this.removeFromWorld = true;
-			  entity.health -= this.collisionDamage;
-			  this.givePoints = true;
+        if (this.collisionDamage > entity.health)
+        {
+          entity.health -= this.collisionDamage;
+        }
+        else
+        {
+          this.removeFromWorld = true;
+          entity.health -= this.collisionDamage;
+          this.givePoints = true;
+        }
       }
     }
   }
